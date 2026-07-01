@@ -1,0 +1,39 @@
+---
+import { getDict, type Locale } from '../lib/i18n';
+interface Props { lang: Locale }
+const { lang } = Astro.props;
+const t = getDict(lang);
+---
+
+<div id="ct-consent" role="dialog" aria-label="Cookies" aria-live="polite"
+  style="display:none;position:fixed;left:18px;right:18px;bottom:18px;z-index:95;max-width:520px;margin:0 auto;flex-wrap:wrap;align-items:center;gap:14px;background:rgba(20,19,26,0.97);backdrop-filter:blur(16px);-webkit-backdrop-filter:blur(16px);border:0.5px solid rgba(255,255,255,0.12);box-shadow:0 18px 50px rgba(0,0,0,0.6);border-radius:14px;padding:16px 18px">
+  <span style="flex:1;min-width:200px;font-size:13px;line-height:1.55;color:#cdc9d8">
+    {t.consent_text} <a href="/privacy" style="color:#cbb6ff;font-weight:500;white-space:nowrap">{t.consent_more}</a>
+  </span>
+  <div style="display:flex;gap:8px;margin-left:auto">
+    <button id="ct-consent-decline" type="button" style="font-size:13px;font-weight:500;color:#cdc9d8;background:rgba(255,255,255,0.06);border:0.5px solid rgba(255,255,255,0.12);padding:9px 14px;border-radius:9px;cursor:pointer">{t.consent_decline}</button>
+    <button id="ct-consent-accept" type="button" style="font-size:13px;font-weight:600;color:#fff;background:linear-gradient(135deg,#9F55FF,#6E5CFF);border:0;padding:9px 16px;border-radius:9px;cursor:pointer;box-shadow:0 6px 16px rgba(120,80,240,0.4)">{t.consent_accept}</button>
+  </div>
+</div>
+
+<script>
+  (() => {
+    const el = document.getElementById('ct-consent');
+    if (!el) return;
+    let saved: string | null = null;
+    try { saved = localStorage.getItem('ct_consent'); } catch {}
+    // NOTE: toggle via style.display, not the `hidden` attribute — the element's
+    // inline `display` would override `[hidden]{display:none}` and never hide it.
+    if (!saved) el.style.display = 'flex';
+    const close = (v: string) => {
+      try { localStorage.setItem('ct_consent', v); } catch {}
+      el.style.display = 'none';
+      const g = (window as any).gtag;
+      if (v === 'granted' && typeof g === 'function') {
+        g('consent', 'update', { analytics_storage: 'granted' });
+      }
+    };
+    document.getElementById('ct-consent-accept')?.addEventListener('click', () => close('granted'));
+    document.getElementById('ct-consent-decline')?.addEventListener('click', () => close('denied'));
+  })();
+</script>

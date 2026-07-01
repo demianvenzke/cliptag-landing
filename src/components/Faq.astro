@@ -1,0 +1,37 @@
+---
+import { getDict, type Locale } from '../lib/i18n';
+interface Props { lang: Locale }
+const { lang } = Astro.props;
+const t = getDict(lang);
+const faqs: [string, string][] = t.faq || [];
+---
+
+<section id="faq" style="max-width:820px;margin:118px auto 0;padding:0 24px">
+  <div data-reveal style="text-align:center;margin-bottom:44px">
+    <h2 class="ct-h2" style="font-size:44px;font-weight:600;letter-spacing:-0.03em;color:#f4f2f8">{t.faq_h2}</h2>
+    <p style="margin-top:14px;font-size:18px;color:#a6a2b2">{t.faq_sub}</p>
+  </div>
+  <div style="display:flex;flex-direction:column;gap:12px">
+    {faqs.map(([q, a], i) => (
+      <div data-faq-item class="ct-faq-card" style="background:linear-gradient(168deg,#1c1c23,#161519);border:0.5px solid rgba(255,255,255,0.06);border-radius:16px;box-shadow:0 1px 0 rgba(255,255,255,0.04) inset,0 8px 22px rgba(0,0,0,0.28);overflow:hidden;transition:box-shadow .25s ease">
+        <button type="button" id={`faq-head-${i}`} class="ct-faq-head" aria-expanded="false" aria-controls={`faq-panel-${i}`} style="display:flex;align-items:center;gap:16px;cursor:pointer;padding:20px 24px;width:100%;text-align:left;background:none;border:0">
+          <span class="ct-faq-q" style="flex:1;font-size:16px;font-weight:600;color:#e7e3f2;transition:color .2s">{q}</span>
+          <svg class="ct-faq-icon" viewBox="0 0 24 24" fill="none" aria-hidden="true" focusable="false" style="flex:0 0 auto;width:22px;height:22px;color:#b07bff;transition:transform .3s cubic-bezier(.2,.8,.2,1)"><path d="M6 9l6 6 6-6" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/></svg>
+        </button>
+        <div class="ct-faq-panel" id={`faq-panel-${i}`} role="region" aria-labelledby={`faq-head-${i}`}>
+          <div><p style="padding:0 24px 22px;font-size:14.5px;line-height:1.65;color:#a6a2b2;margin:0">{a}</p></div>
+        </div>
+      </div>
+    ))}
+  </div>
+</section>
+
+<style>
+  .ct-faq-panel{display:grid;grid-template-rows:0fr;opacity:0;transition:grid-template-rows .35s ease,opacity .3s ease}
+  .ct-faq-panel > div{overflow:hidden}
+  [data-faq-item][data-open] .ct-faq-panel{grid-template-rows:1fr;opacity:1}
+  [data-faq-item][data-open] .ct-faq-icon{transform:rotate(180deg)}
+  [data-faq-item][data-open] .ct-faq-q{color:#f4f2f8}
+  [data-faq-item][data-open] .ct-faq-card,
+  .ct-faq-card:hover{box-shadow:0 1px 0 rgba(255,255,255,0.05) inset,0 16px 38px rgba(0,0,0,0.4)}
+</style>

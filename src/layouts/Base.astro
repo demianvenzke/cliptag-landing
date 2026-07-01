@@ -1,0 +1,186 @@
+---
+import { SITE } from '../config/site';
+import { LOCALES, DEFAULT_LOCALE, getDict, localePath, type Locale } from '../lib/i18n';
+import ConsentBanner from '../components/ConsentBanner.astro';
+import NotifyModal from '../components/NotifyModal.astro';
+import GameOverlay from '../components/GameOverlay.astro';
+
+interface Props {
+  lang: Locale;
+  /** Logical path for canonical/hreflang: '' (home), 'privacy', 'terms'. */
+  path?: string;
+  /** Override <title>; defaults to dict.meta_title. */
+  title?: string;
+  /** Override meta description; defaults to dict.meta_desc. */
+  description?: string;
+  /** Emit hreflang alternates for all locales (home) vs en-only (legal pages). */
+  localized?: boolean;
+  /** Emit the FAQPage JSON-LD (home only). */
+  faqSchema?: boolean;
+  /** Force noindex even after launch (e.g. the /account dashboard). */
+  noindex?: boolean;
+}
+
+const { lang, path = '', title, description, localized = true, faqSchema = false, noindex = false } = Astro.props;
+const dict = getDict(lang);
+
+const pageTitle = title ?? dict.meta_title ?? SITE.name;
+const pageDesc = description ?? dict.meta_desc ?? '';
+const canonical = SITE.origin + localePath(lang, path);
+
+const OG_LOCALE: Record<Locale, string> = {
+  en: 'en_US', de: 'de_DE', fr: 'fr_FR', es: 'es_ES', pt: 'pt_BR', it: 'it_IT',
+};
+
+// hreflang alternates
+const alternates = localized
+  ? LOCALES.map((l) => ({ lang: l, href: SITE.origin + localePath(l, path) }))
+  : [{ lang: DEFAULT_LOCALE, href: SITE.origin + localePath(DEFAULT_LOCALE, path) }];
+const xDefault = SITE.origin + localePath(DEFAULT_LOCALE, path);
+
+// FAQ JSON-LD generated from the active language's dictionary (no drift, real characters).
+const faqLd = faqSchema && Array.isArray(dict.faq)
+  ? {
+      '@context': 'https://schema.org',
+      '@type': 'FAQPage',
+      mainEntity: (dict.faq as [string, string][]).map(([q, a]) => ({
+        '@type': 'Question',
+        name: q,
+        acceptedAnswer: { '@type': 'Answer', text: a },
+      })),
+    }
+  : null;
+
+const ogImage = new URL(SITE.ogImage, SITE.origin).href;
+---
+
+<!doctype html>
+<html lang={lang}>
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <title>{pageTitle}</title>
+    <meta name="description" content={pageDesc} />
+    <link rel="canonical" href={canonical} />
+    {(SITE.preLaunch || noindex) && <meta name="robots" content="noindex,nofollow" />}
+
+    <link rel="icon" type="image/svg+xml" href="/favicon.svg" />
+    <link rel="apple-touch-icon" href="/favicon.svg" />
+    <meta name="theme-color" content="#08080b" />
+
+    {alternates.map((a) => <link rel="alternate" hreflang={a.lang} href={a.href} />)}
+    <link rel="alternate" hreflang="x-default" href={xDefault} />
+
+    {/* Open Graph */}
+    <meta property="og:type" content="website" />
+    <meta property="og:site_name" content={SITE.name} />
+    <meta property="og:title" content={pageTitle} />
+    <meta property="og:description" content={pageDesc} />
+    <meta property="og:url" content={canonical} />
+    <meta property="og:image" content={ogImage} />
+    <meta property="og:image:width" content="1200" />
+    <meta property="og:image:height" content="630" />
+    <meta property="og:locale" content={OG_LOCALE[lang]} />
+
+    {/* Twitter */}
+    <meta name="twitter:card" content="summary_large_image" />
+    <meta name="twitter:title" content={pageTitle} />
+    <meta name="twitter:description" content={pageDesc} />
+    <meta name="twitter:image" content={ogImage} />
+    {SITE.twitter && <meta name="twitter:site" content={'@' + SITE.twitter} />}
+    {SITE.twitter && <meta name="twitter:creator" content={'@' + SITE.twitter} />}
+
+    {faqLd && <script type="application/ld+json" set:html={JSON.stringify(faqLd)} />}
+
+    {/* Google Analytics — production only, behind Consent Mode v2 (default denied). */}
+    {SITE.gaId && import.meta.env.PROD && (
+      <>
+        <script async src={`https://www.googletagmanager.com/gtag/js?id=${SITE.gaId}`}></script>
+        <script is:inline define:vars={{ gaId: SITE.gaId }}>
+          window.dataLayer = window.dataLayer || [];
+          // Assign to window explicitly: Astro wraps define:vars scripts in an IIFE,
+          // so a bare `function gtag` would not be global (the consent banner needs it).
+          window.gtag = function(){ dataLayer.push(arguments); };
+          gtag('consent', 'default', {
+            ad_storage: 'denied', analytics_storage: 'denied',
+            ad_user_data: 'denied', ad_personalization: 'denied',
+            wait_for_update: 500,
+          });
+          try { if (localStorage.getItem('ct_consent') === 'granted') gtag('consent', 'update', { analytics_storage: 'granted' }); } catch (e) {}
+          gtag('js', new Date());
+          gtag('config', gaId, { anonymize_ip: true });
+        </script>
+      </>
+    )}
+  </head>
+  <body data-coming-soon={SITE.comingSoon ? '' : undefined}>
+    <slot />
+    {SITE.gaId && <ConsentBanner lang={lang} />}
+    {SITE.comingSoon && <NotifyModal lang={lang} />}
+    <GameOverlay />
+
+    <style is:global>
+      *{margin:0;padding:0;box-sizing:border-box}
+      html{scroll-behavior:smooth}
+      body{font-family:-apple-system,BlinkMacSystemFont,"SF Pro Display","Inter",sans-serif;background:#08080b;color:#f4f2f8;-webkit-font-smoothing:antialiased;text-rendering:optimizeLegibility}
+      ::selection{background:rgba(143,91,255,0.32);color:#fff}
+      a{color:inherit;text-decoration:none}
+      button{font-family:inherit}
+      section[id],header[id]{scroll-margin-top:80px}
+
+      [data-reveal]{opacity:0;transform:translateY(22px);transition:opacity .7s cubic-bezier(.16,1,.3,1),transform .7s cubic-bezier(.16,1,.3,1)}
+      [data-reveal][data-shown]{opacity:1;transform:none}
+
+      @keyframes ct-float{0%,100%{transform:translateY(0)}50%{transform:translateY(-9px)}}
+      @keyframes ct-pulse{0%,100%{opacity:1}50%{opacity:.35}}
+      @keyframes ct-scanx{0%{left:-42%}100%{left:130%}}
+      @keyframes ct-spin{to{transform:rotate(360deg)}}
+      @keyframes ct-shimmer{0%{background-position:0% 50%}100%{background-position:200% 50%}}
+      @keyframes ct-aurora1{0%,100%{transform:translate(0,0)}50%{transform:translate(30px,20px)}}
+      @keyframes ct-aurora2{0%,100%{transform:translate(0,0)}50%{transform:translate(-26px,24px)}}
+      @keyframes ct-bob{0%,100%{transform:translateY(0)}50%{transform:translateY(3px)}}
+      @keyframes ct-twinkle{0%,100%{opacity:.55;transform:scale(.9)}50%{opacity:1;transform:scale(1.08)}}
+      @keyframes ct-breathe{0%,100%{transform:scale(1)}50%{transform:scale(1.06)}}
+
+      .ct-cta{position:relative;overflow:hidden;transition:transform .25s cubic-bezier(.2,.8,.2,1),box-shadow .25s ease,filter .25s ease}
+      .ct-cta::before{content:"";position:absolute;top:0;left:-130%;width:55%;height:100%;background:linear-gradient(100deg,transparent,rgba(255,255,255,0.45),transparent);transform:skewX(-18deg);transition:left .6s cubic-bezier(.2,.8,.2,1);pointer-events:none}
+      .ct-cta:hover{transform:translateY(-2px) scale(1.025);box-shadow:0 18px 44px rgba(120,80,240,0.6)!important;filter:saturate(1.12) brightness(1.05)}
+      .ct-cta:hover::before{left:140%}
+      .ct-cta:active{transform:translateY(0) scale(.985);transition-duration:.08s}
+      .ct-cta-ghost{transition:background .22s ease,border-color .22s ease,transform .22s ease,color .22s ease}
+      .ct-cta-ghost:hover{background:rgba(255,255,255,0.08)!important;border-color:rgba(143,91,255,0.45)!important;transform:translateY(-1px);color:#fff!important}
+
+      /* keyboard focus visibility (a11y) */
+      a:focus-visible,button:focus-visible{outline:2px solid #b07bff;outline-offset:3px;border-radius:6px}
+
+      /* ---- Responsive ---- */
+      @media (max-width:900px){
+        .ct-h1{font-size:50px !important}
+        .ct-h2{font-size:36px !important}
+        .ct-grid-features{grid-template-columns:1fr 1fr !important}
+        .ct-feat{grid-column:span 1 !important}
+        .ct-feat-wide{flex-direction:column !important;align-items:flex-start !important;gap:22px !important}
+        .ct-feat-wide > div:last-child{flex:1 1 auto !important;max-width:100% !important;width:100% !important}
+        .ct-grid-how{grid-template-columns:1fr !important}
+        .ct-grid-pricing{grid-template-columns:1fr 1fr !important}
+      }
+      @media (max-width:620px){
+        .ct-nav-links{display:none !important}
+        .ct-nav-signin{display:none !important}
+        .ct-h1{font-size:38px !important}
+        .ct-h2{font-size:29px !important}
+        .ct-grid-features{grid-template-columns:1fr !important}
+        .ct-grid-pricing{grid-template-columns:1fr !important}
+        .ct-grid-ki{grid-template-columns:1fr !important}
+        .ct-meta{display:none !important}
+        .ct-mockup{height:420px !important;padding:18px 16px !important}
+      }
+
+      /* ---- Reduced motion ---- */
+      @media (prefers-reduced-motion: reduce){
+        *,*::before,*::after{animation-duration:.001ms !important;animation-iteration-count:1 !important;transition-duration:.001ms !important;scroll-behavior:auto !important}
+        [data-reveal]{opacity:1 !important;transform:none !important}
+      }
+    </style>
+  </body>
+</html>

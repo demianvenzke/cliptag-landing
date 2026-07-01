@@ -1,0 +1,111 @@
+---
+import { DEMO } from '../data/demo';
+import { getDict, type Locale } from '../lib/i18n';
+
+interface Props { lang: Locale }
+const { lang } = Astro.props;
+const t = getDict(lang);
+
+const caps: string[] = t.demoCaps || [];
+const titles: string[] = t.demoTitles || [];
+const tagsArr: string[][] = t.demoTags || [];
+const total = DEMO.length;
+const waitLabel: string = t.mock_wait || 'Queued';
+const countTpl: string = t.mock_count_tpl || '{d} / {t} clips';
+
+// Server-rendered default snapshot (looks alive with JS off / before hydration).
+const initialStep = 2;
+const stateOf = (i: number) => (i < initialStep ? 'done' : i === initialStep ? 'scanning' : 'queued');
+const doneCount = Math.min(initialStep, total);
+const initCount = countTpl.replace('{d}', String(doneCount)).replace('{t}', String(total));
+const initPct = Math.round((doneCount / total) * 100) + '%';
+const mockTitle = (t.mock_title_tpl || 'Analyzing {n} clips').replace('{n}', String(total));
+
+const metaFor = (i: number) => {
+  const st = stateOf(i);
+  if (st === 'done') return DEMO[i].specs.join('  ·  ');
+  if (st === 'queued') return waitLabel;
+  return '';
+};
+const metaColor = (i: number) => (stateOf(i) === 'done' ? '#8b8694' : '#6d6879');
+---
+
+<section style="max-width:1000px;margin:54px auto 0;padding:0 24px">
+  <div data-reveal style="position:relative">
+    <div style="-webkit-mask-image:linear-gradient(to bottom,#000 58%,transparent 100%);mask-image:linear-gradient(to bottom,#000 58%,transparent 100%)">
+      <div data-toast-trigger style="border-radius:15px;overflow:hidden;background:#0f0f12;border:0.5px solid rgba(255,255,255,0.08);box-shadow:0 -22px 70px rgba(125,82,205,0.12),0 44px 120px rgba(0,0,0,0.72),0 1px 0 rgba(255,255,255,0.06) inset;cursor:default">
+        <div style="height:46px;display:flex;align-items:center;gap:8px;padding:0 16px;border-bottom:0.5px solid rgba(255,255,255,0.07);background:#121215">
+          <span aria-hidden="true" style="width:12px;height:12px;border-radius:999px;background:#FF5F57"></span>
+          <span aria-hidden="true" style="width:12px;height:12px;border-radius:999px;background:#FEBC2E"></span>
+          <span aria-hidden="true" style="width:12px;height:12px;border-radius:999px;background:#28C840"></span>
+          <span style="margin:0 auto;font-size:12.5px;color:#8b8694;font-family:ui-monospace,SFMono-Regular,Menlo,monospace">Cliptag — /Volumes/DJI_SD/DCIM</span>
+          <span style="width:54px"></span>
+        </div>
+
+        <div class="ct-mockup" style="position:relative;height:470px;background:#0f0f12;overflow:hidden;pointer-events:none;padding:24px 28px;display:flex;flex-direction:column">
+          <div style="display:flex;align-items:flex-start;gap:14px">
+            <div style="min-width:0">
+              <div style="font-size:18px;font-weight:600;letter-spacing:-0.01em;color:#f4f2f8">{mockTitle}</div>
+              <div style="margin-top:4px;font-size:12.5px;color:#8b8694">{t.mock_sub}</div>
+            </div>
+            <div style="margin-left:auto;font-size:12.5px;color:#a6a2b2;font-family:ui-monospace,Menlo,monospace;white-space:nowrap"><span id="ct-demo-count">{initCount}</span> · <span id="ct-demo-pct">{initPct}</span></div>
+          </div>
+
+          <div style="margin-top:14px;height:6px;border-radius:999px;background:#0c0c0f;box-shadow:inset 0 1px 3px rgba(0,0,0,0.55);overflow:hidden">
+            <div id="ct-demo-bar" style={`height:100%;width:${initPct};border-radius:999px;background:linear-gradient(90deg,#9F55FF,#6E5CFF);box-shadow:0 0 12px rgba(120,80,240,0.5);transition:width .55s cubic-bezier(0.16,1,0.3,1)`}></div>
+          </div>
+
+          <div id="ct-demo" data-total={total} data-count-tpl={countTpl} style="margin-top:18px;background:#161619;border:0.5px solid rgba(255,255,255,0.07);border-radius:16px;overflow:hidden">
+            {DEMO.map((clip, i) => (
+              <div
+                data-demo-row
+                data-state={stateOf(i)}
+                data-wait={waitLabel}
+                data-specs={clip.specs.join('  ·  ')}
+                style={`display:flex;align-items:center;gap:14px;padding:13px 16px;${i === 0 ? '' : 'border-top:0.5px solid rgba(255,255,255,0.06);'}transition:background .4s ease`}
+              >
+                <div class="ct-thumb" style={`position:relative;width:66px;height:40px;flex:0 0 auto;border-radius:8px;overflow:hidden;background:${clip.thumb};box-shadow:inset 0 0 0 0.5px rgba(255,255,255,0.1)`}>
+                  <span class="demo-scan" aria-hidden="true" style="position:absolute;top:0;bottom:0;width:42%;left:-42%;background:linear-gradient(90deg,transparent,rgba(255,255,255,0.18),transparent);animation:ct-scanx 1.3s ease-in-out infinite"></span>
+                </div>
+
+                <div style="flex:1;min-width:0">
+                  <div class="demo-queued">
+                    <div style="font-size:13.5px;color:#6d6879;font-family:ui-monospace,SFMono-Regular,Menlo,monospace;overflow:hidden;text-overflow:ellipsis;white-space:nowrap">{clip.raw}</div>
+                  </div>
+                  <div class="demo-scanning">
+                    <div style="display:flex;align-items:center;gap:9px">
+                      <span class="demo-spinner" aria-hidden="true" style="width:13px;height:13px;border:2px solid rgba(143,91,255,0.45);border-top-color:#8A5BFF;border-radius:999px;animation:ct-spin .7s linear infinite;flex:0 0 auto"></span>
+                      <span style="font-size:14px;font-weight:500;color:#f4f2f8;overflow:hidden;text-overflow:ellipsis;white-space:nowrap">{caps[i] || ''}</span>
+                    </div>
+                    <div style="margin-top:5px;font-size:11px;color:#6d6879;font-family:ui-monospace,Menlo,monospace;overflow:hidden;text-overflow:ellipsis;white-space:nowrap">{clip.raw}</div>
+                  </div>
+                  <div class="demo-done">
+                    <div style="font-size:14px;font-weight:500;color:#f4f2f8;overflow:hidden;text-overflow:ellipsis;white-space:nowrap">{titles[i] || ''}</div>
+                    <div style="margin-top:6px;display:flex;gap:6px;flex-wrap:wrap">
+                      {(tagsArr[i] || []).map((tag) => (
+                        <span style="font-size:10.5px;font-weight:500;color:#a6a2b2;background:rgba(255,255,255,0.055);padding:2px 8px;border-radius:999px;white-space:nowrap">{tag}</span>
+                      ))}
+                    </div>
+                  </div>
+                </div>
+
+                <span class="ct-meta demo-meta" style={`flex:0 0 auto;margin-left:12px;font-size:11px;font-family:ui-monospace,Menlo,monospace;color:${metaColor(i)};white-space:nowrap`}>{metaFor(i)}</span>
+              </div>
+            ))}
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<style>
+  [data-demo-row] .demo-queued,
+  [data-demo-row] .demo-scanning,
+  [data-demo-row] .demo-done { display: none; }
+  [data-demo-row][data-state="queued"] .demo-queued { display: block; }
+  [data-demo-row][data-state="scanning"] .demo-scanning { display: block; }
+  [data-demo-row][data-state="done"] .demo-done { display: block; }
+  [data-demo-row]:not([data-state="scanning"]) .demo-scan { display: none; }
+  [data-demo-row][data-state="scanning"] { background: rgba(143,91,255,0.06); }
+</style>

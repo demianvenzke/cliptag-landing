@@ -1,0 +1,43 @@
+---
+import Base from '../layouts/Base.astro';
+import LegalShell from '../components/LegalShell.astro';
+import { SITE } from '../config/site';
+---
+
+<Base
+  lang="en"
+  path="privacy"
+  title="Privacy Policy — Cliptag"
+  description="How Cliptag and Framepass LLC handle your data. Your original videos never leave your Mac; cloud mode sends only small still frames, local mode sends nothing."
+  localized={false}
+>
+  <LegalShell title="Privacy Policy" updated="Last updated 1 June 2025 · Framepass LLC">
+    <p class="lead">The short version: your original videos never leave your Mac. In cloud mode we send only small still frames for analysis. In local mode, nothing leaves your device. We never track or analyze your footage. The website uses optional, consent-based analytics only.</p>
+
+    <p>This Privacy Policy explains what data Cliptag and {SITE.company} ("we", "us") collect and how we handle it. It applies to the Cliptag macOS app and the cliptag.ai website.</p>
+
+    <h2>1. What we collect</h2>
+    <p>We keep data collection minimal. We collect your email address when you purchase a plan, and usage counts tied to your license key so we can enforce monthly clip limits. We do not require an account to use the free tier. If you voluntarily submit your email to our pre-launch waitlist, we use it solely to notify you when Cliptag launches; that form is processed by Web3Forms and the address is deleted once it is no longer needed.</p>
+
+    <h2>2. What is sent to the cloud</h2>
+    <p>When you use cloud analysis, Cliptag extracts small JPEG frames from your clips and sends only those frames to the AI provider (Google Gemini) for analysis. Your original video files are never uploaded. Frames are used only to generate names and tags and are not used to train models by us.</p>
+
+    <h2>3. Local-only mode</h2>
+    <p>If you enable local-only mode, all analysis happens on your Mac using an on-device model. In this mode no frames, clips, or metadata are sent to any server. This is the recommended setting for sensitive footage.</p>
+
+    <h2>4. Website analytics</h2>
+    <p>We do not run any analytics inside the app, and we never analyze the content of your footage for any purpose beyond producing the tags you requested. On the cliptag.ai website we use Google Analytics (GA4) to understand aggregate traffic. It runs only after you opt in via the cookie banner — until then, and if you decline, Google Consent Mode keeps analytics storage disabled and no analytics cookies are set. IP addresses are anonymized. You can change your choice any time by clearing the cliptag.ai site data in your browser.</p>
+
+    <h2>5. Payments</h2>
+    <p>Payments are processed by Paddle, our Merchant of Record. Paddle collects the billing information needed to complete your purchase (such as name, billing address, and payment details) — we do not receive or store your full payment details. Paddle's handling of that data is governed by Paddle's own privacy policy.</p>
+
+    <h2>6. Data retention</h2>
+    <p>License and usage data is stored in our database (Supabase) for as long as your account is active. You can request deletion of your data at any time by emailing us, and we will delete it except where we are required to retain records for legal or tax purposes.</p>
+
+    <h2>7. GDPR and your rights</h2>
+    <p>For EU customers, Paddle acts as Merchant of Record and handles compliance obligations for payments, including VAT. The app itself processes no personal data about you beyond your email and license usage. You have the right to access, correct, or delete your personal data — contact us to exercise these rights.</p>
+
+    <h2>8. Contact</h2>
+    <p>{SITE.company}, Florida, USA<br />Privacy questions and data requests: <a href={`mailto:${SITE.contactEmail}`}>{SITE.contactEmail}</a></p>
+  </LegalShell>
+</Base>

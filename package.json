@@ -1,0 +1,17 @@
+{
+  "name": "cliptag-landing",
+  "type": "module",
+  "version": "0.1.0",
+  "private": true,
+  "scripts": {
+    "dev": "astro dev",
+    "build": "astro build",
+    "preview": "astro preview",
+    "check": "astro check"
+  },
+  "dependencies": {
+    "@astrojs/sitemap": "^3",
+    "@supabase/supabase-js": "^2.109.0",
+    "astro": "^5"
+  }
+}

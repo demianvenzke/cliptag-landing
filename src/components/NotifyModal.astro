@@ -1,0 +1,108 @@
+---
+import { SITE } from '../config/site';
+import { getDict, type Locale } from '../lib/i18n';
+interface Props { lang: Locale }
+const { lang } = Astro.props;
+const t = getDict(lang);
+const key = SITE.web3formsKey;
+---
+
+<div id="ct-notify" class="ct-modal" role="dialog" aria-modal="true" aria-labelledby="ct-notify-title">
+  <div class="ct-modal-backdrop" data-notify-close></div>
+  <div class="ct-modal-card">
+    <button class="ct-modal-x" type="button" aria-label="Close" data-notify-close>✕</button>
+    <div class="ct-modal-ic" aria-hidden="true">
+      <svg width="24" height="24" viewBox="0 0 24 24" fill="none"><path d="M18 8a6 6 0 0 0-12 0c0 7-3 9-3 9h18s-3-2-3-9" stroke="#fff" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round"/><path d="M13.7 21a2 2 0 0 1-3.4 0" stroke="#fff" stroke-width="1.7" stroke-linecap="round"/></svg>
+    </div>
+    <h2 id="ct-notify-title">{t.soon_title}</h2>
+    <p class="ct-modal-msg">{t.soon_msg}</p>
+
+    {key && (
+      <form id="ct-notify-form" novalidate>
+        <input type="hidden" name="access_key" value={key} />
+        <input type="hidden" name="subject" value="Cliptag — neue Launch-Anmeldung 🚀" />
+        <input type="hidden" name="from_name" value="Cliptag Landing" />
+        <input type="checkbox" name="botcheck" class="ct-hp" tabindex="-1" autocomplete="off" aria-hidden="true" />
+        <div class="ct-notify-row">
+          <input id="ct-notify-email" name="email" type="email" required placeholder={t.soon_email_ph} autocomplete="email" />
+          <button type="submit" class="ct-notify-submit">{t.soon_notify}</button>
+        </div>
+        <p class="ct-notify-note">{t.soon_priv} · <a href="/privacy">{t.consent_more}</a></p>
+        <p class="ct-notify-status" id="ct-notify-msg" role="status" aria-live="polite"></p>
+      </form>
+    )}
+  </div>
+</div>
+
+<script is:inline define:vars={{ thanks: t.soon_thanks, errMsg: t.soon_err }}>
+  (() => {
+    const modal = document.getElementById('ct-notify');
+    if (!modal) return;
+    const open = () => {
+      modal.classList.add('open');
+      setTimeout(() => { const i = document.getElementById('ct-notify-email'); if (i) i.focus(); }, 60);
+    };
+    const close = () => modal.classList.remove('open');
+
+    document.addEventListener('click', (e) => {
+      const t = e.target;
+      const link = t && t.closest && t.closest('a[href="#"]');
+      if (link) { e.preventDefault(); open(); return; }
+      if (t && t.closest && t.closest('[data-notify-close]')) close();
+    });
+    document.addEventListener('keydown', (e) => { if (e.key === 'Escape') close(); });
+
+    const form = document.getElementById('ct-notify-form');
+    if (form) {
+      form.addEventListener('submit', async (e) => {
+        e.preventDefault();
+        const btn = form.querySelector('button[type=submit]');
+        const msgEl = document.getElementById('ct-notify-msg');
+        const row = form.querySelector('.ct-notify-row');
+        if (btn) btn.disabled = true;
+        try {
+          const res = await fetch('https://api.web3forms.com/submit', {
+            method: 'POST', headers: { Accept: 'application/json' }, body: new FormData(form),
+          });
+          const data = await res.json();
+          if (data && data.success) {
+            if (msgEl) { msgEl.textContent = thanks; msgEl.setAttribute('data-ok', '1'); }
+            if (row) row.style.display = 'none';
+            const note = form.querySelector('.ct-notify-note'); if (note) note.style.display = 'none';
+          } else {
+            if (msgEl) { msgEl.textContent = errMsg; msgEl.removeAttribute('data-ok'); }
+            if (btn) btn.disabled = false;
+          }
+        } catch (_) {
+          if (msgEl) { msgEl.textContent = errMsg; msgEl.removeAttribute('data-ok'); }
+          if (btn) btn.disabled = false;
+        }
+      });
+    }
+  })();
+</script>
+
+<style>
+  .ct-modal{position:fixed;inset:0;z-index:200;display:none;align-items:center;justify-content:center;padding:20px}
+  .ct-modal.open{display:flex}
+  .ct-modal-backdrop{position:absolute;inset:0;background:rgba(8,8,11,0.72);backdrop-filter:blur(6px);-webkit-backdrop-filter:blur(6px)}
+  .ct-modal-card{position:relative;width:100%;max-width:440px;background:linear-gradient(168deg,#1c1c23,#161519);border:0.5px solid rgba(143,91,255,0.25);border-radius:20px;box-shadow:0 30px 80px rgba(0,0,0,0.6);padding:34px 30px;text-align:center;animation:ct-modal-in .3s cubic-bezier(.16,1,.3,1)}
+  @keyframes ct-modal-in{from{opacity:0;transform:translateY(16px) scale(.98)}to{opacity:1;transform:none}}
+  .ct-modal-x{position:absolute;top:13px;right:15px;background:none;border:0;color:#8b8694;font-size:16px;cursor:pointer;line-height:1;padding:6px;transition:color .2s}
+  .ct-modal-x:hover{color:#f4f2f8}
+  .ct-modal-ic{width:52px;height:52px;margin:0 auto 16px;border-radius:14px;background:linear-gradient(135deg,#9F55FF,#6E5CFF);display:flex;align-items:center;justify-content:center;box-shadow:0 8px 22px rgba(120,80,240,0.4)}
+  .ct-modal-card h2{font-size:24px;font-weight:600;letter-spacing:-0.02em;color:#f4f2f8}
+  .ct-modal-card .ct-modal-msg{margin-top:10px;font-size:14.5px;line-height:1.6;color:#a6a2b2}
+  .ct-notify-row{margin-top:20px;display:flex;gap:8px}
+  .ct-notify-row input[type=email]{flex:1;min-width:0;font-size:14px;color:#f4f2f8;background:rgba(255,255,255,0.05);border:0.5px solid rgba(255,255,255,0.12);border-radius:10px;padding:12px 14px;outline:none;transition:border-color .15s}
+  .ct-notify-row input[type=email]:focus{border-color:#8A5BFF}
+  .ct-notify-submit{flex:0 0 auto;font-size:14px;font-weight:600;color:#fff;border:0;border-radius:10px;padding:12px 18px;background:linear-gradient(135deg,#9F55FF,#6E5CFF);box-shadow:0 6px 18px rgba(120,80,240,0.4);cursor:pointer;white-space:nowrap;transition:transform .15s,filter .15s}
+  .ct-notify-submit:hover{transform:translateY(-1px);filter:brightness(1.06)}
+  .ct-notify-submit:disabled{opacity:.6;cursor:default;transform:none}
+  .ct-notify-note{margin-top:12px;font-size:11.5px;color:#8b8694}
+  .ct-notify-note a{color:#cbb6ff}
+  .ct-notify-status{margin-top:14px;font-size:14px;color:#a6a2b2;min-height:1px}
+  .ct-notify-status[data-ok]{color:#5fe0ac;font-weight:600}
+  .ct-hp{position:absolute !important;left:-9999px;opacity:0;height:0;width:0}
+  @media (max-width:480px){ .ct-notify-row{flex-direction:column} .ct-modal-card{padding:30px 22px} }
+</style>

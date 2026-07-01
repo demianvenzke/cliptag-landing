@@ -1,0 +1,110 @@
+---
+import { getDict, type Locale } from '../lib/i18n';
+interface Props { lang: Locale }
+const { lang } = Astro.props;
+const t = getDict(lang);
+---
+
+<section id="features" style="max-width:1120px;margin:118px auto 0;padding:0 24px">
+  <div data-reveal style="text-align:center;margin-bottom:52px">
+    <h2 class="ct-h2" style="font-size:44px;font-weight:600;letter-spacing:-0.03em;color:#f4f2f8">{t.feat_h2}</h2>
+    <p style="margin-top:14px;font-size:18px;color:#a6a2b2">{t.feat_sub}</p>
+  </div>
+  <div class="ct-grid-features" style="display:grid;grid-template-columns:repeat(6,1fr);gap:16px">
+
+    <div data-reveal class="ct-feat" style="grid-column:span 4;position:relative;overflow:hidden;background:linear-gradient(168deg,#1c1c23,#161519);border:0.5px solid rgba(255,255,255,0.06);border-radius:18px;box-shadow:0 1px 0 rgba(255,255,255,0.045) inset,0 16px 38px rgba(0,0,0,0.42);padding:30px">
+      <div aria-hidden="true" style="position:absolute;top:-50px;right:-40px;width:260px;height:260px;background:radial-gradient(circle,rgba(143,91,255,0.16),transparent 70%);pointer-events:none"></div>
+      <div style="position:relative;display:flex;align-items:center;gap:12px">
+        <div aria-hidden="true" style="width:42px;height:42px;border-radius:11px;background:linear-gradient(160deg,rgba(143,91,255,0.32),rgba(143,91,255,0.12));border:0.5px solid rgba(143,91,255,0.22);box-shadow:0 1px 0 rgba(255,255,255,0.13) inset,0 5px 12px rgba(0,0,0,0.32);display:flex;align-items:center;justify-content:center;color:#b07bff"><svg width="22" height="22" viewBox="0 0 24 24" fill="none"><path d="M11 3l1.6 5.4L18 10l-5.4 1.6L11 17l-1.6-5.4L4 10l5.4-1.6L11 3z" fill="currentColor"/><path d="M18 13l.8 2.6 2.6.8-2.6.8L18 20l-.8-2.8-2.6-.8 2.6-.8L18 13z" fill="currentColor" opacity=".7"/></svg></div>
+        <h3 style="font-size:19px;font-weight:600;color:#f4f2f8">{t.f1_title}</h3>
+      </div>
+      <p style="position:relative;margin-top:12px;font-size:14.5px;line-height:1.6;color:#a6a2b2;max-width:460px">{t.f1_desc}</p>
+      <div style="position:relative;margin-top:22px;display:flex;align-items:center;gap:12px;flex-wrap:wrap">
+        <span style="font-family:ui-monospace,Menlo,monospace;font-size:12px;color:#8b8694;background:rgba(255,255,255,0.04);border:0.5px solid rgba(255,255,255,0.08);padding:9px 12px;border-radius:9px">DJI_0036.MP4</span>
+        <svg width="20" height="20" viewBox="0 0 24 24" fill="none" aria-hidden="true" style="flex:0 0 auto"><path d="M5 12h14m0 0l-5-5m5 5l-5 5" stroke="#8A5BFF" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"/></svg>
+        <span style="font-family:ui-monospace,Menlo,monospace;font-size:12px;color:#cbb6ff;background:rgba(143,91,255,0.12);border:0.5px solid rgba(143,91,255,0.3);padding:9px 12px;border-radius:9px;word-break:break-all">01-00-Bangkok-Departure-Prep-Handheld_16x9_4K_25FPS_DJI</span>
+      </div>
+      <div style="position:relative;margin-top:14px;display:flex;gap:7px;flex-wrap:wrap">
+        <span style="font-size:11px;font-weight:500;color:#a6a2b2;background:rgba(255,255,255,0.055);padding:3px 10px;border-radius:999px">Subject A</span>
+        <span style="font-size:11px;font-weight:500;color:#a6a2b2;background:rgba(255,255,255,0.055);padding:3px 10px;border-radius:999px">Handheld</span>
+        <span style="font-size:11px;font-weight:500;color:#a6a2b2;background:rgba(255,255,255,0.055);padding:3px 10px;border-radius:999px">Indoor</span>
+        <span style="font-size:11px;font-weight:500;color:#a6a2b2;background:rgba(255,255,255,0.055);padding:3px 10px;border-radius:999px">Travel</span>
+      </div>
+    </div>
+
+    <div data-reveal class="ct-feat" style="grid-column:span 2;position:relative;overflow:hidden;background:linear-gradient(165deg,#221836,#16151b);box-shadow:0 1px 0 rgba(255,255,255,0.05) inset,0 16px 38px rgba(0,0,0,0.4);border:0.5px solid rgba(143,91,255,0.22);border-radius:18px;padding:28px;display:flex;flex-direction:column">
+      <div aria-hidden="true" style="width:46px;height:46px;border-radius:12px;background:linear-gradient(135deg,#9F55FF,#6E5CFF);display:flex;align-items:center;justify-content:center;box-shadow:0 6px 18px rgba(120,80,240,0.4)"><svg width="24" height="24" viewBox="0 0 24 24" fill="none"><path d="M12 3l7 3v5c0 4.4-3 8-7 10-4-2-7-5.6-7-10V6l7-3z" stroke="#fff" stroke-width="1.6" stroke-linejoin="round"/><path d="M9.5 12l1.8 1.8 3.4-3.6" stroke="#fff" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"/></svg></div>
+      <h3 style="margin-top:18px;font-size:18px;font-weight:600;color:#f4f2f8">{t.f2_title}</h3>
+      <p style="margin-top:8px;font-size:14px;line-height:1.6;color:#a6a2b2;flex:1">{t.f2_desc}</p>
+      <span style="margin-top:16px;align-self:flex-start;font-size:12.5px;font-weight:600;color:#cbb6ff;background:rgba(143,91,255,0.16);padding:7px 13px;border-radius:999px">{t.f2_badge}</span>
+    </div>
+
+    <div data-reveal class="ct-feat" style="grid-column:span 3;background:linear-gradient(168deg,#1c1c23,#161519);border:0.5px solid rgba(255,255,255,0.06);border-radius:18px;box-shadow:0 1px 0 rgba(255,255,255,0.045) inset,0 16px 38px rgba(0,0,0,0.42);padding:28px">
+      <div style="display:flex;align-items:center;gap:12px">
+        <div aria-hidden="true" style="width:42px;height:42px;border-radius:11px;background:linear-gradient(160deg,rgba(143,91,255,0.32),rgba(143,91,255,0.12));border:0.5px solid rgba(143,91,255,0.22);box-shadow:0 1px 0 rgba(255,255,255,0.13) inset,0 5px 12px rgba(0,0,0,0.32);display:flex;align-items:center;justify-content:center;color:#b07bff"><svg width="22" height="22" viewBox="0 0 24 24" fill="none"><path d="M3 7a2 2 0 012-2h3.2a2 2 0 011.4.6L11 7h6a2 2 0 012 2v7a2 2 0 01-2 2H5a2 2 0 01-2-2V7z" stroke="currentColor" stroke-width="1.7" stroke-linejoin="round"/></svg></div>
+        <h3 style="font-size:18px;font-weight:600;color:#f4f2f8">{t.f3_title}</h3>
+      </div>
+      <p style="margin-top:11px;font-size:14px;line-height:1.6;color:#a6a2b2">{t.f3_desc}</p>
+      <div style="margin-top:18px;display:flex;flex-direction:column;gap:7px;font-family:ui-monospace,Menlo,monospace;font-size:12px;color:#a6a2b2">
+        <div style="display:flex;align-items:center;gap:8px"><span aria-hidden="true" style="color:#8A5BFF">▸</span> {t.f3_tree1}</div>
+        <div style="padding-left:18px;color:#8b8694">Bangkok-Departure-Prep…</div>
+        <div style="display:flex;align-items:center;gap:8px"><span aria-hidden="true" style="color:#8A5BFF">▸</span> {t.f3_tree2}</div>
+        <div style="padding-left:18px;color:#8b8694">Skyline-Sunset-Reveal…</div>
+      </div>
+    </div>
+
+    <div data-reveal class="ct-feat" style="grid-column:span 3;background:linear-gradient(168deg,#1c1c23,#161519);border:0.5px solid rgba(255,255,255,0.06);border-radius:18px;box-shadow:0 1px 0 rgba(255,255,255,0.045) inset,0 16px 38px rgba(0,0,0,0.42);padding:28px">
+      <div style="display:flex;align-items:center;gap:12px">
+        <div aria-hidden="true" style="width:42px;height:42px;border-radius:11px;background:linear-gradient(160deg,rgba(143,91,255,0.32),rgba(143,91,255,0.12));border:0.5px solid rgba(143,91,255,0.22);box-shadow:0 1px 0 rgba(255,255,255,0.13) inset,0 5px 12px rgba(0,0,0,0.32);display:flex;align-items:center;justify-content:center;color:#b07bff"><svg width="22" height="22" viewBox="0 0 24 24" fill="none"><path d="M3 11.5V5a2 2 0 012-2h6.5a2 2 0 011.4.6l7 7a2 2 0 010 2.8l-6.5 6.5a2 2 0 01-2.8 0l-7-7A2 2 0 013 11.5z" stroke="currentColor" stroke-width="1.7" stroke-linejoin="round"/><circle cx="8" cy="8" r="1.6" fill="currentColor"/></svg></div>
+        <h3 style="font-size:18px;font-weight:600;color:#f4f2f8">{t.f4_title}</h3>
+      </div>
+      <p style="margin-top:11px;font-size:14px;line-height:1.6;color:#a6a2b2">{t.f4_desc}</p>
+      <div aria-hidden="true" style="margin-top:20px;display:flex;align-items:center;gap:9px">
+        <span style="width:14px;height:14px;border-radius:999px;background:#ff5f57"></span>
+        <span style="width:14px;height:14px;border-radius:999px;background:#febc2e"></span>
+        <span style="width:14px;height:14px;border-radius:999px;background:#28c840"></span>
+        <span style="width:14px;height:14px;border-radius:999px;background:#5b8cff"></span>
+        <span style="width:14px;height:14px;border-radius:999px;background:#9F55FF"></span>
+      </div>
+      <div style="margin-top:14px;display:flex;gap:7px;flex-wrap:wrap">
+        <span style="font-size:11px;font-weight:500;color:#a6a2b2;background:rgba(255,255,255,0.055);padding:3px 10px;border-radius:999px">A-Roll</span>
+        <span style="font-size:11px;font-weight:500;color:#a6a2b2;background:rgba(255,255,255,0.055);padding:3px 10px;border-radius:999px">B-Roll</span>
+        <span style="font-size:11px;font-weight:600;color:#f5c97a;background:rgba(245,166,35,0.12);border:0.5px solid rgba(245,166,35,0.28);padding:3px 10px;border-radius:999px;white-space:nowrap">{t.f4_chip_review}</span>
+      </div>
+    </div>
+
+    <div data-reveal class="ct-feat ct-feat-wide" style="grid-column:span 6;position:relative;overflow:hidden;background:linear-gradient(168deg,#1c1c23,#161519);border:0.5px solid rgba(255,255,255,0.06);border-radius:18px;box-shadow:0 1px 0 rgba(255,255,255,0.045) inset,0 16px 38px rgba(0,0,0,0.42);padding:30px;display:flex;gap:36px;align-items:center">
+      <div aria-hidden="true" style="position:absolute;top:-60px;left:-30px;width:280px;height:280px;background:radial-gradient(circle,rgba(245,166,35,0.10),transparent 70%);pointer-events:none"></div>
+      <div style="position:relative;flex:1;min-width:0">
+        <div style="display:flex;align-items:center;gap:12px">
+          <div aria-hidden="true" style="width:42px;height:42px;border-radius:11px;background:linear-gradient(160deg,rgba(245,166,35,0.32),rgba(245,166,35,0.12));border:0.5px solid rgba(245,166,35,0.24);box-shadow:0 1px 0 rgba(255,255,255,0.13) inset,0 5px 12px rgba(0,0,0,0.32);display:flex;align-items:center;justify-content:center;color:#f5b53f"><svg width="22" height="22" viewBox="0 0 24 24" fill="none"><circle cx="11" cy="11" r="7" stroke="currentColor" stroke-width="1.7"/><path d="M16.5 16.5L21 21" stroke="currentColor" stroke-width="1.7" stroke-linecap="round"/><path d="M11 8v3.5M11 14h.01" stroke="currentColor" stroke-width="1.7" stroke-linecap="round"/></svg></div>
+          <h3 style="font-size:19px;font-weight:600;color:#f4f2f8">{t.f5_title}</h3>
+        </div>
+        <p style="margin-top:12px;font-size:14.5px;line-height:1.6;color:#a6a2b2;max-width:400px">{t.f5_desc}</p>
+      </div>
+      <div style="position:relative;flex:0 0 360px;max-width:360px;display:flex;flex-direction:column;gap:9px">
+        <div style="display:flex;align-items:center;gap:12px;background:rgba(255,255,255,0.03);border:0.5px solid rgba(255,255,255,0.07);border-radius:11px;padding:11px 13px">
+          <span aria-hidden="true" style="flex:0 0 auto;width:30px;height:30px;border-radius:7px;background:rgba(245,166,35,0.14);display:flex;align-items:center;justify-content:center;color:#f5b53f"><svg width="15" height="15" viewBox="0 0 24 24" fill="none"><path d="M12 3l9 16H3L12 3z" stroke="currentColor" stroke-width="1.8" stroke-linejoin="round"/><path d="M12 10v3.5M12 16h.01" stroke="currentColor" stroke-width="1.8" stroke-linecap="round"/></svg></span>
+          <span style="flex:1;min-width:0;font-family:ui-monospace,Menlo,monospace;font-size:12px;color:#a6a2b2;white-space:nowrap;overflow:hidden;text-overflow:ellipsis">C0042.MP4</span>
+          <span style="flex:0 0 auto;font-size:11px;font-weight:600;color:#f5c97a;background:rgba(245,166,35,0.14);padding:4px 9px;border-radius:999px">{t.badge_shaky}</span>
+        </div>
+        <div style="display:flex;align-items:center;gap:12px;background:rgba(255,255,255,0.03);border:0.5px solid rgba(255,255,255,0.07);border-radius:11px;padding:11px 13px">
+          <span aria-hidden="true" style="flex:0 0 auto;width:30px;height:30px;border-radius:7px;background:rgba(245,166,35,0.14);display:flex;align-items:center;justify-content:center;color:#f5b53f"><svg width="15" height="15" viewBox="0 0 24 24" fill="none"><path d="M12 3l9 16H3L12 3z" stroke="currentColor" stroke-width="1.8" stroke-linejoin="round"/><path d="M12 10v3.5M12 16h.01" stroke="currentColor" stroke-width="1.8" stroke-linecap="round"/></svg></span>
+          <span style="flex:1;min-width:0;font-family:ui-monospace,Menlo,monospace;font-size:12px;color:#a6a2b2;white-space:nowrap;overflow:hidden;text-overflow:ellipsis">DJI_0188.MP4</span>
+          <span style="flex:0 0 auto;font-size:11px;font-weight:600;color:#f5c97a;background:rgba(245,166,35,0.14);padding:4px 9px;border-radius:999px">{t.badge_blurry}</span>
+        </div>
+        <div style="display:flex;align-items:center;gap:12px;background:rgba(255,255,255,0.03);border:0.5px solid rgba(255,255,255,0.07);border-radius:11px;padding:11px 13px">
+          <span aria-hidden="true" style="flex:0 0 auto;width:30px;height:30px;border-radius:7px;background:rgba(57,211,155,0.14);display:flex;align-items:center;justify-content:center;color:#39d39b"><svg width="15" height="15" viewBox="0 0 24 24" fill="none"><path d="M5 12.5l4.5 4.5L19 7" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/></svg></span>
+          <span style="flex:1;min-width:0;font-family:ui-monospace,Menlo,monospace;font-size:12px;color:#a6a2b2;white-space:nowrap;overflow:hidden;text-overflow:ellipsis">A001_0307.MOV</span>
+          <span style="flex:0 0 auto;font-size:11px;font-weight:600;color:#5fe0ac;background:rgba(57,211,155,0.14);padding:4px 9px;border-radius:999px">{t.badge_clean}</span>
+        </div>
+      </div>
+    </div>
+
+  </div>
+</section>
+
+<style>
+  .ct-feat{transition:transform .25s ease,border-color .25s ease,box-shadow .25s ease}
+  .ct-feat:hover{transform:translateY(-4px);border-color:rgba(143,91,255,0.4) !important;box-shadow:0 1px 0 rgba(255,255,255,0.06) inset,0 26px 60px rgba(0,0,0,0.55) !important}
+</style>

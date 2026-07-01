@@ -1,0 +1,55 @@
+---
+import Base from '../layouts/Base.astro';
+import LegalShell from '../components/LegalShell.astro';
+import { SITE } from '../config/site';
+---
+
+<Base
+  lang="en"
+  path="terms"
+  title="Terms of Service — Cliptag"
+  description="The terms governing your use of Cliptag, the macOS video-clip sorter by Framepass LLC."
+  localized={false}
+>
+  <LegalShell title="Terms of Service" updated="Last updated 1 June 2025 · Framepass LLC">
+    <p>These Terms of Service ("Terms") govern your use of Cliptag, a macOS desktop application provided by {SITE.company} ("Framepass", "we", "us"). By downloading, installing, or using Cliptag, you agree to these Terms. If you do not agree, do not use the app.</p>
+
+    <h2>1. The service</h2>
+    <p>Cliptag analyzes your video clips to generate titles, tags, scene labels, and Finder metadata. Analysis runs either in the cloud (via Google's Gemini models) or entirely on your Mac in local-only mode, depending on your settings. We do not guarantee that AI-generated names, tags, or labels are accurate, complete, or fit for any particular purpose.</p>
+
+    <h2>2. Accounts and license keys</h2>
+    <p>Paid plans are unlocked with a license key issued at purchase. You are responsible for keeping your key confidential. We may track usage counts associated with your key to enforce monthly clip limits. You may not resell, share, or redistribute license keys.</p>
+
+    <h2>3. Free tier, plans and rollover</h2>
+    <p>The free tier allows 25 AI clips per month at no cost and requires no payment details. Paid plans (Creator, Pro, Studio) raise your monthly clip allowance. Monthly allowances reset at the start of each billing month. Unused clips on paid plans partly carry over into a rollover buffer — up to 2× your monthly allowance on Creator (max 1,000 clips) and up to 3× on Pro (max 6,000 clips) — so a quiet month feeds a busier one. The free tier does not accumulate a rollover buffer. Buffered clips are drawn from automatically once a month's base allowance is used up.</p>
+
+    <h2>4. Billing</h2>
+    <p>Paid subscriptions are billed monthly or yearly through Paddle, our Merchant of Record. Paddle handles payment processing and the collection and remittance of applicable taxes, including EU VAT. Your purchase is also subject to Paddle's buyer terms. Prices are shown at checkout and may change with notice for future billing periods.</p>
+
+    <h2 id="refunds">5. Cancellation and refunds</h2>
+    <p><strong>Cancellation.</strong> You can cancel your subscription at any time from your account or by contacting us. After cancelling you keep access to your paid allowance until the end of the current billing period; your subscription then ends and your account reverts to the free tier. We do not charge a cancellation fee.</p>
+    <p><strong>14-day money-back guarantee.</strong> Cliptag offers a free tier so you can evaluate the app before paying. If a paid plan is not right for you, you may request a full refund within 14 days of the purchase or renewal date — no specific reason required. We may decline only clearly abusive or repeated requests (for example, requesting a refund every billing cycle while continuing heavy use).</p>
+    <p><strong>Statutory rights.</strong> If you are a consumer in the EU or UK, you have a statutory right to withdraw from a distance purchase within 14 days. Because Cliptag is a digital service supplied immediately, this right can lapse once the service has been fully performed with your prior express consent; in any event, the voluntary 14-day refund above gives you at least equivalent protection, and your mandatory statutory rights are not affected by these terms.</p>
+    <p><strong>Billing problems.</strong> If you were charged in error, charged twice, or the service was not available as described, contact us and we will correct it, including a full or pro-rated refund where appropriate.</p>
+    <p><strong>How to request a refund.</strong> Email <a href="mailto:hello@framepass.io">hello@framepass.io</a> from the address used at checkout, or include your order ID. Refunds are issued to your original payment method. Payments and refunds are handled by Paddle.com Market Ltd, our Merchant of Record, and are typically completed within 5–10 business days. Paddle's <a href="https://www.paddle.com/legal/buyer-terms" rel="noopener" target="_blank">buyer terms</a> apply in addition to — and do not replace — this policy.</p>
+    <p><strong>Renewals.</strong> Subscriptions renew automatically at the end of each billing period at the then-current price. Cancel before the renewal date to avoid the next charge.</p>
+
+    <h2>6. Your content and privacy</h2>
+    <p>When you use cloud analysis, Cliptag extracts small JPEG frames from your clips and sends only those frames to the analysis provider. Your original video files never leave your Mac. In local-only mode, no clip data leaves your device at all. Your handling of footage remains your responsibility — see our <a href="/privacy">Privacy Policy</a> for details.</p>
+
+    <h2>7. Acceptable use</h2>
+    <p>You agree not to use Cliptag to process content you do not have the right to process, to reverse engineer or circumvent license limits, or to use the app in violation of applicable law. We may suspend access for serious or repeated violations.</p>
+
+    <h2>8. Disclaimers and liability</h2>
+    <p>Cliptag is provided "as is" without warranties of any kind. To the maximum extent permitted by law, Framepass is not liable for any indirect, incidental, or consequential damages, or for data loss arising from your use of the app. Our total liability is limited to the amount you paid us in the twelve months preceding the claim.</p>
+
+    <h2>9. Changes to these terms</h2>
+    <p>We may update these Terms from time to time. Material changes will be reflected by the "last updated" date above. Continued use of Cliptag after changes take effect constitutes acceptance.</p>
+
+    <h2>10. Governing law</h2>
+    <p>These Terms are governed by the laws of the State of Florida, USA, without regard to conflict-of-law rules.</p>
+
+    <h2>11. Contact</h2>
+    <p>{SITE.company}, Florida, USA · EIN 39-4454684<br />Questions about these Terms: <a href={`mailto:${SITE.contactEmail}`}>{SITE.contactEmail}</a></p>
+  </LegalShell>
+</Base>

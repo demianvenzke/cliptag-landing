@@ -1,0 +1,37 @@
+# Cliptag landing — Caddy config for a Hetzner (or any) static host.
+# Serves the built dist/ with automatic HTTPS (Let's Encrypt).
+# Place at /etc/caddy/Caddyfile, then: sudo systemctl reload caddy
+
+cliptag.ai, www.cliptag.ai {
+	root * /var/www/cliptag-landing
+	encode zstd gzip
+	file_server
+
+	# www → apex
+	@www host www.cliptag.ai
+	redir @www https://cliptag.ai{uri} permanent
+
+	# hashed assets: cache forever
+	@assets path /_astro/*
+	header @assets Cache-Control "public, max-age=31536000, immutable"
+
+	# html: always revalidate
+	@html path *.html /
+	header @html Cache-Control "public, max-age=0, must-revalidate"
+
+	header {
+		X-Content-Type-Options nosniff
+		Referrer-Policy strict-origin-when-cross-origin
+		X-Frame-Options SAMEORIGIN
+		# CSP: self + Google Analytics + ipapi geo. Tighten/extend if you add services.
+		Content-Security-Policy "default-src 'self'; script-src 'self' 'unsafe-inline' https://www.googletagmanager.com https://*.paddle.com; img-src 'self' data: https://www.googletagmanager.com https://www.google-analytics.com https://*.paddle.com; connect-src 'self' https://www.google-analytics.com https://*.google-analytics.com https://*.analytics.google.com https://www.googletagmanager.com https://ipapi.co https://api.web3forms.com https://*.paddle.com https://qqhomwfkxcjgzzrreiia.supabase.co https://cliptag-proxy.fly.dev; style-src 'self' 'unsafe-inline' https://*.paddle.com; font-src 'self'; frame-src https://*.paddle.com; base-uri 'self'; frame-ancestors 'self'; form-action 'self'"
+		-Server
+	}
+
+	# Astro's generated 404 page
+	handle_errors {
+		@404 expression {http.error.status_code} == 404
+		rewrite @404 /404.html
+		file_server
+	}
+}

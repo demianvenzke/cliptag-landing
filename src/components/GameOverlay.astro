@@ -1,0 +1,52 @@
+---
+// Easter egg: type "cliptag" anywhere on the site to open the Cliprunner mini-game.
+// Best score is kept only for the current browser session (cliprunner.html uses sessionStorage).
+---
+
+<div id="ct-game" class="ct-game-overlay" role="dialog" aria-modal="true" aria-label="Cliprunner">
+  <button class="ct-game-x" type="button" aria-label="Close (Esc)" data-game-close>✕</button>
+  <div class="ct-game-frame">
+    <iframe id="ct-game-iframe" title="Cliprunner" loading="lazy"></iframe>
+  </div>
+</div>
+
+<script>
+  (() => {
+    const ov = document.getElementById('ct-game');
+    const fr = document.getElementById('ct-game-iframe') as HTMLIFrameElement | null;
+    if (!ov || !fr) return;
+    const open = () => {
+      if (!fr.getAttribute('src')) fr.setAttribute('src', '/cliprunner.html');
+      ov.classList.add('open');
+      setTimeout(() => { try { fr.focus(); } catch {} }, 60);
+    };
+    const close = () => {
+      ov.classList.remove('open');
+      fr.setAttribute('src', 'about:blank'); // stop the rAF loop; session best survives via sessionStorage
+    };
+    ov.querySelectorAll('[data-game-close]').forEach((b) => b.addEventListener('click', close));
+    ov.addEventListener('click', (e) => { if (e.target === ov) close(); });
+
+    let seq = '';
+    window.addEventListener('keydown', (e) => {
+      if (e.key === 'Escape' && ov.classList.contains('open')) { close(); return; }
+      if (ov.classList.contains('open')) return;
+      const t = e.target as HTMLElement | null;
+      const tn = (t && t.tagName) || '';
+      if (/^(INPUT|TEXTAREA|SELECT)$/.test(tn) || (t && t.isContentEditable)) return;
+      if (e.key && e.key.length === 1) {
+        seq = (seq + e.key.toLowerCase()).slice(-7);
+        if (seq === 'cliptag') { seq = ''; open(); }
+      }
+    });
+  })();
+</script>
+
+<style>
+  .ct-game-overlay{display:none;position:fixed;inset:0;z-index:300;align-items:center;justify-content:center;padding:24px;background:rgba(8,8,11,0.82);backdrop-filter:blur(6px);-webkit-backdrop-filter:blur(6px)}
+  .ct-game-overlay.open{display:flex}
+  .ct-game-frame{position:relative;width:min(960px,92vw);height:min(600px,72vh);border-radius:16px;overflow:hidden;border:0.5px solid rgba(143,91,255,0.3);box-shadow:0 30px 90px rgba(0,0,0,0.65);background:#0f0f12}
+  .ct-game-frame iframe{width:100%;height:100%;border:0;display:block}
+  .ct-game-x{position:absolute;top:18px;right:20px;z-index:2;width:36px;height:36px;border-radius:999px;border:0.5px solid rgba(255,255,255,0.14);background:rgba(20,19,26,0.92);color:#cdc9d8;font-size:15px;cursor:pointer;display:flex;align-items:center;justify-content:center;transition:color .2s,transform .16s}
+  .ct-game-x:hover{color:#fff;transform:translateY(-1px)}
+</style>

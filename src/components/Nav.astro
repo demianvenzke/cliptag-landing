@@ -1,0 +1,59 @@
+---
+import { LINKS } from '../config/site';
+import { getDict, localePath, LANG_ORDER, LANG_LABELS, type Locale } from '../lib/i18n';
+
+interface Props { lang: Locale }
+const { lang } = Astro.props;
+const t = getDict(lang);
+---
+
+<nav id="ct-nav" data-nav style="position:sticky;top:0;z-index:60;transition:background .3s ease,border-color .3s ease;border-bottom:0.5px solid rgba(255,255,255,0)">
+  <div style="max-width:1120px;margin:0 auto;padding:16px 24px;display:flex;align-items:center;gap:32px">
+    <a href={localePath(lang, '')} aria-label="Cliptag — home" style="display:flex;align-items:center;gap:10px">
+      <img src="/cliptag-logo-dark.svg" alt="Cliptag" width="103" height="24" style="height:24px;width:auto;display:block" />
+    </a>
+
+    <div class="ct-nav-links" style="display:flex;gap:26px;margin-left:8px">
+      <a class="ct-navlink" href="#features">{t.nav_features}</a>
+      <a class="ct-navlink" href="#ki">{t.nav_ki}</a>
+      <a class="ct-navlink" href="#pricing">{t.nav_pricing}</a>
+      <a class="ct-navlink" href="#faq">{t.nav_faq}</a>
+    </div>
+
+    <div style="margin-left:auto;display:flex;align-items:center;gap:10px">
+      <div data-langmenu style="position:relative">
+        <button id="ct-langbtn" type="button" aria-haspopup="true" aria-expanded="false" aria-label="Language" class="ct-langbtn" style="display:flex;align-items:center;gap:6px;font-size:13px;color:#cdc9d8;background:rgba(255,255,255,0.04);border:0.5px solid rgba(255,255,255,0.09);padding:7px 10px;border-radius:9px;cursor:pointer;transition:background .2s ease,color .2s ease">
+          <svg width="16" height="16" viewBox="0 0 24 24" fill="none" aria-hidden="true" focusable="false"><circle cx="12" cy="12" r="9" stroke="currentColor" stroke-width="1.6"/><path d="M3 12h18M12 3c2.6 2.7 2.6 15.3 0 18M12 3c-2.6 2.7-2.6 15.3 0 18" stroke="currentColor" stroke-width="1.3"/></svg>
+          <span style="font-weight:600">{lang.toUpperCase()}</span>
+          <svg id="ct-langcaret" width="12" height="12" viewBox="0 0 24 24" fill="none" aria-hidden="true" focusable="false" style="opacity:.7;transition:transform .25s ease"><path d="M6 9l6 6 6-6" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/></svg>
+        </button>
+        <div id="ct-langmenu" role="menu" hidden style="position:absolute;top:calc(100% + 8px);right:0;min-width:170px;background:rgba(20,19,26,0.97);backdrop-filter:blur(16px);-webkit-backdrop-filter:blur(16px);border:0.5px solid rgba(255,255,255,0.1);border-radius:12px;box-shadow:0 18px 44px rgba(0,0,0,0.55);padding:6px;z-index:80">
+          {LANG_ORDER.map((lg) => (
+            <a
+              role="menuitem"
+              href={localePath(lg, '')}
+              data-setlang={lg}
+              hreflang={lg}
+              class="ct-langrow"
+              aria-current={lg === lang ? 'true' : undefined}
+              style={`display:flex;align-items:center;justify-content:space-between;gap:12px;padding:9px 12px;border-radius:8px;font-size:14px;color:${lg === lang ? '#f4f2f8' : '#a6a2b2'};background:${lg === lang ? 'rgba(143,91,255,0.12)' : 'transparent'};transition:background .15s ease`}
+            >
+              <span>{LANG_LABELS[lg]}</span>
+              <svg width="14" height="14" viewBox="0 0 24 24" fill="none" aria-hidden="true" focusable="false" style={`color:#b07bff;opacity:${lg === lang ? 1 : 0}`}><path d="M5 12.5l4.5 4.5L19 7" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"/></svg>
+            </a>
+          ))}
+        </div>
+      </div>
+
+      <a href={LINKS.signin} class="ct-nav-signin ct-cta-ghost" style="font-size:14px;color:#f4f2f8;padding:8px 12px;border-radius:9px;background:transparent;border:0.5px solid transparent;white-space:nowrap">{t.nav_signin}</a>
+      <a href={LINKS.download} class="ct-cta" style="font-size:14px;color:#fff;font-weight:600;padding:9px 17px;border-radius:10px;background:linear-gradient(135deg,#9F55FF,#6E5CFF);box-shadow:0 6px 20px rgba(120,80,240,0.42);display:flex;align-items:center;gap:7px;white-space:nowrap">{t.nav_download}</a>
+    </div>
+  </div>
+</nav>
+
+<style>
+  .ct-navlink{font-size:14px;color:#a6a2b2;transition:color .2s}
+  .ct-navlink:hover{color:#f4f2f8}
+  .ct-langbtn:hover{background:rgba(255,255,255,0.07);color:#f4f2f8}
+  .ct-langrow:hover{background:rgba(255,255,255,0.05) !important}
+</style>

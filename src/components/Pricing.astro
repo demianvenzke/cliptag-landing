@@ -1,0 +1,132 @@
+---
+import { PLANS, PLAN_PRICES, LOCALE_CURRENCY, PADDLE, PLAN_ORDER, LINKS, DEFAULT_BILLING, type PlanId } from '../config/site';
+import { getDict, type Locale } from '../lib/i18n';
+
+interface Props { lang: Locale }
+const { lang } = Astro.props;
+const t = getDict(lang);
+
+const plansI18n: any[] = t.plans || [];
+const NAMES: Record<PlanId, string> = { free: 'Free', creator: 'Creator', pro: 'Pro', studio: 'Studio' };
+const MARKS: Record<PlanId, string[]> = {
+  free: ['✓', '✓', '✓', '✓', '–'], creator: ['✓', '✓', '✓', '✓'], pro: ['✓', '✓', '✓', '✓'], studio: ['✓', '✓', '✓', '✓'],
+};
+const FLAGS: Record<PlanId, number[]> = {
+  free: [1, 1, 1, 1, 0], creator: [1, 1, 1, 1], pro: [1, 1, 1, 1], studio: [1, 1, 1, 1],
+};
+
+// Anzeige-Währung folgt der Sprache (Option A): EN → USD, EU-Sprachen → EUR.
+const px = PLAN_PRICES[LOCALE_CURRENCY[lang] ?? 'eur'];
+
+const plans = PLAN_ORDER.map((id, idx) => {
+  const cfg = PLANS[id];
+  const tr = plansI18n[idx] || {};
+  const featured = !!cfg.featured;
+  const isFree = id === 'free';
+  return {
+    id,
+    name: NAMES[id],
+    cta: tr.cta || NAMES[id],
+    featured,
+    priceMonthly: px[id].priceMonthly,
+    priceYearly: px[id].priceYearly,
+    per: isFree ? '' : (tr.per || ''),
+    billedMonthly: isFree ? (tr.billedM || '') : (tr.billedM || ''),
+    billedYearly: isFree ? (tr.billedM || '') : (tr.billedY || ''),
+    clipsNum: tr.clipsNum || '',
+    clipsUnit: tr.clipsUnit || '',
+    priceIdMonthly: isFree ? '' : (PADDLE.prices[id]?.monthly || ''),
+    priceIdYearly: isFree ? '' : (PADDLE.prices[id]?.yearly || ''),
+    feats: (tr.feats || []).map((label: string, j: number) => ({
+      label,
+      mark: MARKS[id][j] ?? '✓',
+      ok: !!(FLAGS[id][j] ?? 1),
+    })),
+    hrefMonthly: isFree ? LINKS.freeCta : cfg.checkoutMonthly,
+    hrefYearly: isFree ? LINKS.freeCta : cfg.checkoutYearly,
+    ctaClass: featured ? 'ct-cta' : 'ct-cta-ghost',
+  };
+});
+
+const cardStyle = (featured: boolean) =>
+  `position:relative;height:100%;display:flex;flex-direction:column;border-radius:18px;padding:28px 22px;` +
+  (featured
+    ? `background:linear-gradient(180deg,#221836,#16151b);border:1px solid rgba(143,91,255,0.5);box-shadow:0 1px 0 rgba(255,255,255,0.06) inset,0 24px 56px rgba(120,80,240,0.26);`
+    : `background:linear-gradient(168deg,#1c1c23,#161519);border:0.5px solid rgba(255,255,255,0.06);box-shadow:0 1px 0 rgba(255,255,255,0.045) inset,0 16px 38px rgba(0,0,0,0.42);`);
+
+const ctaStyle = (featured: boolean) =>
+  `display:block;box-sizing:border-box;text-align:center;font-size:14px;border-radius:10px;padding:12px 16px;margin-top:22px;` +
+  (featured
+    ? `font-weight:600;color:#fff;background:linear-gradient(135deg,#9F55FF,#6E5CFF);box-shadow:0 6px 18px rgba(120,80,240,0.4);`
+    : `font-weight:500;color:#f4f2f8;background:#1c1c21;border:0.5px solid rgba(255,255,255,0.1);`);
+---
+
+<section id="pricing" data-billing={DEFAULT_BILLING} style="max-width:1120px;margin:118px auto 0;padding:0 24px">
+  <div data-reveal style="text-align:center;margin-bottom:52px">
+    <h2 class="ct-h2" style="font-size:44px;font-weight:600;letter-spacing:-0.03em;color:#f4f2f8">{t.price_h2}</h2>
+    <p style="margin-top:14px;font-size:18px;color:#a6a2b2">{t.price_sub}</p>
+  </div>
+
+  <div data-reveal style="display:flex;align-items:center;justify-content:center;gap:13px;margin-bottom:38px;flex-wrap:wrap">
+    <button id="ct-bill-monthly" type="button" class="ct-bill-label" data-billing-set="monthly">{t.bill_monthly}</button>
+    <button id="ct-bill-toggle" type="button" role="switch" aria-label={t.bill_yearly} aria-checked={DEFAULT_BILLING === 'yearly' ? 'true' : 'false'} class="ct-switch"><span class="ct-switch-knob" aria-hidden="true"></span></button>
+    <button id="ct-bill-yearly" type="button" class="ct-bill-label" data-billing-set="yearly">{t.bill_yearly}</button>
+    <span style="font-size:12px;font-weight:600;color:#39d39b;background:rgba(57,211,155,0.14);padding:5px 11px;border-radius:999px">{t.bill_badge}</span>
+  </div>
+
+  <div class="ct-grid-pricing" style="display:grid;grid-template-columns:repeat(4,1fr);gap:16px;align-items:stretch">
+    {plans.map((plan) => (
+      <div data-reveal style="height:100%">
+        <div class="ct-pcard" style={cardStyle(plan.featured)}>
+          {plan.featured && (
+            <span style="position:absolute;top:-11px;left:50%;transform:translateX(-50%);font-size:11px;font-weight:600;color:#fff;background:linear-gradient(135deg,#9F55FF,#6E5CFF);padding:4px 13px;border-radius:999px;letter-spacing:.02em;box-shadow:0 4px 12px rgba(120,80,240,0.4);white-space:nowrap">{t.plan_badge}</span>
+          )}
+          <div style="font-size:15px;font-weight:600;color:#f4f2f8">{plan.name}</div>
+          <div style="margin-top:10px;display:flex;align-items:baseline;gap:3px">
+            <span class="ct-price price-yearly" style="font-size:36px;font-weight:600;letter-spacing:-0.02em;color:#f4f2f8">{plan.priceYearly}</span>
+            <span class="ct-price price-monthly" style="font-size:36px;font-weight:600;letter-spacing:-0.02em;color:#f4f2f8">{plan.priceMonthly}</span>
+            <span style="font-size:14px;color:#8b8694">{plan.per}</span>
+          </div>
+          <div style="margin-top:5px;font-size:12.5px;color:#8b8694">
+            <span class="billed-yearly">{plan.billedYearly}</span><span class="billed-monthly">{plan.billedMonthly}</span>
+          </div>
+          <div style="margin-top:16px;padding-top:16px;border-top:0.5px solid rgba(255,255,255,0.07);font-size:14px;color:#f4f2f8"><span style="font-weight:700">{plan.clipsNum}</span> <span style="color:#a6a2b2">{plan.clipsUnit}</span></div>
+          <div style="margin-top:14px;display:flex;flex-direction:column;gap:9px;flex:1">
+            {plan.feats.map((ft) => (
+              <div style="display:flex;align-items:flex-start;gap:9px;font-size:13px;color:#a6a2b2;line-height:1.4">
+                <span aria-hidden="true" style={`flex:0 0 auto;width:15px;font-weight:700;color:${ft.ok ? '#39d39b' : '#6d6879'}`}>{ft.mark}</span>
+                <span>{ft.label}</span>
+              </div>
+            ))}
+          </div>
+          <a class={plan.ctaClass} data-paddle={plan.priceIdMonthly ? '' : undefined} data-price-monthly={plan.priceIdMonthly || undefined} data-price-yearly={plan.priceIdYearly || undefined} data-href-monthly={plan.hrefMonthly} data-href-yearly={plan.hrefYearly} href={DEFAULT_BILLING === 'yearly' ? plan.hrefYearly : plan.hrefMonthly} style={ctaStyle(plan.featured)}>{plan.cta}</a>
+        </div>
+      </div>
+    ))}
+  </div>
+
+  <div data-reveal style="margin-top:22px;background:linear-gradient(168deg,#1a1a20,#151418);border:0.5px solid rgba(255,255,255,0.06);border-radius:14px;box-shadow:0 1px 0 rgba(255,255,255,0.04) inset,0 12px 28px rgba(0,0,0,0.36);padding:18px 22px;font-size:13.5px;line-height:1.6;color:#a6a2b2;max-width:760px;margin-left:auto;margin-right:auto;text-align:center"><span style="color:#cbb6ff;font-weight:600">{t.rollover_label}</span>{t.rollover_rest}</div>
+  <div data-reveal style="margin-top:16px;text-align:center;font-size:14px;color:#a6a2b2">{t.langs_note} <span style="color:#8b8694">(DE · EN · FR · ES · PT · IT)</span>.</div>
+</section>
+
+<style>
+  .ct-pcard{transition:transform .25s ease,border-color .25s ease,box-shadow .25s ease}
+  .ct-pcard:hover{transform:translateY(-4px);border-color:rgba(143,91,255,0.4) !important;box-shadow:0 1px 0 rgba(255,255,255,0.06) inset,0 26px 60px rgba(0,0,0,0.55) !important}
+
+  /* billing toggle */
+  .ct-bill-label{font-size:14px;font-weight:500;color:#6d6879;cursor:pointer;background:none;border:0;padding:0;transition:color .2s}
+  #pricing[data-billing="monthly"] #ct-bill-monthly,
+  #pricing[data-billing="yearly"] #ct-bill-yearly{color:#f4f2f8;font-weight:600}
+  .ct-switch{width:46px;height:26px;border-radius:999px;background:#2a2a31;position:relative;cursor:pointer;border:0;padding:0;transition:background .25s ease;flex:0 0 auto;box-shadow:inset 0 1px 3px rgba(0,0,0,0.4)}
+  #pricing[data-billing="yearly"] .ct-switch{background:linear-gradient(135deg,#9F55FF,#6E5CFF)}
+  .ct-switch-knob{position:absolute;top:3px;left:3px;width:20px;height:20px;border-radius:999px;background:#fff;transition:left .25s cubic-bezier(.4,0,.2,1);box-shadow:0 1px 3px rgba(0,0,0,0.5)}
+  #pricing[data-billing="yearly"] .ct-switch-knob{left:23px}
+
+  /* price / billed visibility by billing state (default = yearly) */
+  .price-monthly,.billed-monthly{display:none}
+  .price-yearly{display:inline}.billed-yearly{display:inline}
+  #pricing[data-billing="monthly"] .price-yearly,
+  #pricing[data-billing="monthly"] .billed-yearly{display:none}
+  #pricing[data-billing="monthly"] .price-monthly{display:inline}
+  #pricing[data-billing="monthly"] .billed-monthly{display:inline}
+</style>

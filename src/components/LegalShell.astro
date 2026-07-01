@@ -1,0 +1,36 @@
+---
+import Footer from './Footer.astro';
+
+interface Props { title: string; eyebrow?: string; updated?: string }
+const { title, eyebrow = 'Legal', updated } = Astro.props;
+---
+
+<div style="min-height:100vh;background:radial-gradient(1100px 480px at 50% -12%,rgba(125,82,205,0.14),transparent 60%),linear-gradient(180deg,#15141b 0%,#0f0e14 40%,#08080b 100%)">
+  <nav style="position:sticky;top:0;z-index:60;background:rgba(16,15,20,0.74);backdrop-filter:saturate(180%) blur(20px);-webkit-backdrop-filter:saturate(180%) blur(20px);border-bottom:0.5px solid rgba(255,255,255,0.07)">
+    <div style="max-width:1120px;margin:0 auto;padding:14px 24px;display:flex;align-items:center;gap:32px">
+      <a href="/" aria-label="Cliptag — home" style="display:flex;align-items:center;gap:10px"><img src="/cliptag-logo-dark.svg" alt="Cliptag" width="103" height="24" style="height:24px;width:auto;display:block" /></a>
+      <a href="/" class="ct-flink" style="margin-left:auto;display:flex;align-items:center;gap:7px;font-size:14px;color:#a6a2b2"><svg width="15" height="15" viewBox="0 0 24 24" fill="none" aria-hidden="true" focusable="false"><path d="M15 6l-6 6 6 6" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"/></svg>Back to home</a>
+    </div>
+  </nav>
+
+  <main style="max-width:760px;margin:0 auto;padding:64px 24px 96px">
+    <span style="display:inline-block;font-size:12px;font-weight:600;color:#cbb6ff;background:rgba(143,91,255,0.16);padding:5px 12px;border-radius:999px;letter-spacing:.02em">{eyebrow}</span>
+    <h1 style="margin-top:18px;font-size:44px;font-weight:600;letter-spacing:-0.03em;color:#f4f2f8">{title}</h1>
+    {updated && <p style="margin-top:12px;font-size:15px;color:#8b8694">{updated}</p>}
+    <div class="ct-legal" style="margin-top:36px;font-size:15.5px;line-height:1.7;color:#a6a2b2">
+      <slot />
+    </div>
+  </main>
+
+  <Footer lang="en" />
+</div>
+
+<style>
+  .ct-flink{transition:color .2s}
+  .ct-flink:hover{color:#f4f2f8}
+  .ct-legal :global(h2){margin-top:40px;font-size:21px;font-weight:600;letter-spacing:-0.01em;color:#f4f2f8;scroll-margin-top:80px}
+  .ct-legal :global(p){margin-top:12px}
+  .ct-legal :global(a){color:#cbb6ff;font-weight:500}
+  .ct-legal :global(a:hover){color:#fff}
+  .ct-legal :global(.lead){margin-top:0;background:linear-gradient(168deg,#1c1c23,#161519);border:0.5px solid rgba(255,255,255,0.07);border-radius:12px;padding:20px 22px;color:#e7e3f2;font-size:15px;line-height:1.65}
+</style>

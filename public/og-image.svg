@@ -1,0 +1,27 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="1200" height="630" viewBox="0 0 1200 630" fill="none">
+  <defs>
+    <linearGradient id="bg" x1="0" y1="0" x2="1200" y2="630" gradientUnits="userSpaceOnUse">
+      <stop stop-color="#1b1a22"/><stop offset=".5" stop-color="#100f15"/><stop offset="1" stop-color="#08080b"/>
+    </linearGradient>
+    <radialGradient id="glow" cx="50%" cy="0%" r="60%"><stop stop-color="#7d52cd" stop-opacity="0.32"/><stop offset="1" stop-color="#7d52cd" stop-opacity="0"/></radialGradient>
+    <linearGradient id="brand" x1="80" y1="250" x2="900" y2="430" gradientUnits="userSpaceOnUse">
+      <stop stop-color="#b07bff"/><stop offset=".5" stop-color="#6E5CFF"/><stop offset="1" stop-color="#b07bff"/>
+    </linearGradient>
+    <linearGradient id="mark" x1="120" y1="70" x2="60" y2="92" gradientUnits="userSpaceOnUse">
+      <stop stop-color="#9844FE"/><stop offset="1" stop-color="#255CF3"/>
+    </linearGradient>
+  </defs>
+  <rect width="1200" height="630" fill="url(#bg)"/>
+  <rect width="1200" height="630" fill="url(#glow)"/>
+
+  <!-- brand mark -->
+  <g transform="translate(80 70) scale(1.5)">
+    <path d="M20.4763 1.37247C23.3391 1.37281 25.6599 3.69421 25.6599 6.55704C25.6596 9.41959 23.3389 11.7403 20.4763 11.7406H7.60522C5.92708 11.7408 4.56719 13.1015 4.56714 14.7797V18.5336C4.56738 20.2116 5.9272 21.5725 7.60522 21.5727H18.6882C20.3662 21.5724 21.7271 20.2116 21.7273 18.5336V17.2719C21.7216 17.1117 21.7226 16.9514 21.7332 16.7914C21.7356 16.7556 21.7386 16.7202 21.7429 16.685C21.8585 15.3877 22.5112 14.1309 23.7048 13.2953L28.2625 10.1049C31.3427 7.94895 35.5746 10.1527 35.575 13.9125V20.2934L35.5632 20.641C35.3119 24.1866 31.2465 26.1898 28.2625 24.101L24.8806 21.7338C23.7207 23.9733 21.3841 25.5051 18.6882 25.5053H7.60522C3.75524 25.5051 0.63379 22.3836 0.633545 18.5336V14.7797C0.633595 10.9296 3.75513 7.8082 7.60522 7.80801H20.4763C21.1669 7.80767 21.727 7.24764 21.7273 6.55704C21.7273 5.86617 21.1671 5.3064 20.4763 5.30606H11.449C10.3631 5.30606 9.48242 4.42504 9.48218 3.33926C9.48218 2.25328 10.363 1.37247 11.449 1.37247H20.4763ZM31.6433 13.9125C31.643 13.3343 30.9911 12.9959 30.5173 13.3275L25.9597 16.518C25.5792 16.7849 25.5552 17.3306 25.8884 17.6322L25.9597 17.6889L30.5173 20.8793C30.9912 21.211 31.6433 20.8718 31.6433 20.2934V13.9125Z" fill="url(#mark)"/>
+  </g>
+  <text x="138" y="100" font-family="-apple-system, BlinkMacSystemFont, 'SF Pro Display', Inter, sans-serif" font-size="30" font-weight="600" fill="#f4f2f8">Cliptag</text>
+
+  <text x="80" y="300" font-family="-apple-system, BlinkMacSystemFont, 'SF Pro Display', Inter, sans-serif" font-size="92" font-weight="600" letter-spacing="-3" fill="#f4f2f8">Sort your clips.</text>
+  <text x="80" y="408" font-family="-apple-system, BlinkMacSystemFont, 'SF Pro Display', Inter, sans-serif" font-size="92" font-weight="600" letter-spacing="-3" fill="url(#brand)">Keep your flow.</text>
+
+  <text x="82" y="478" font-family="-apple-system, BlinkMacSystemFont, 'SF Pro Display', Inter, sans-serif" font-size="30" fill="#a6a2b2">AI names, tags &amp; sorts your footage — straight into an edit-ready library.</text>
+</svg>

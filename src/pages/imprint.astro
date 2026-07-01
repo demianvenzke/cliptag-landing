@@ -1,0 +1,54 @@
+---
+import Base from '../layouts/Base.astro';
+import LegalShell from '../components/LegalShell.astro';
+import { SITE } from '../config/site';
+
+// Registered business address (Framepass LLC).
+const ADDRESS_LINES: string[] = [
+  '3833 Powerline Rd, Suite 201',
+  'Fort Lauderdale, FL 33309',
+  'United States',
+];
+const hasAddress = ADDRESS_LINES.length > 0;
+---
+
+<Base
+  lang="en"
+  path="imprint"
+  title="Legal Notice — Cliptag"
+  description="Legal notice and provider identification for Cliptag, operated by Framepass LLC."
+  localized={false}
+>
+  <LegalShell title="Legal Notice" eyebrow="Imprint">
+    <p>Information pursuant to applicable provider-identification and e-commerce rules.</p>
+
+    <h2>Provider</h2>
+    <p>
+      {SITE.company}<br />
+      Limited Liability Company (LLC), State of Florida, United States<br />
+      {hasAddress ? ADDRESS_LINES.map((l) => (<>{l}<br /></>)) : (<>Florida, United States<br /></>)}
+      EIN 39-4454684
+    </p>
+
+    <h2>Represented by</h2>
+    <p>Demian Alexander Venzke (Managing Member)</p>
+
+    <h2>Contact</h2>
+    <p>
+      Email: <a href={`mailto:${SITE.contactEmail}`}>{SITE.contactEmail}</a><br />
+      Website: <a href={SITE.origin}>{SITE.origin.replace('https://', '')}</a>
+    </p>
+
+    <h2>VAT / sales tax</h2>
+    <p>Purchases are sold and invoiced by Paddle.com Market Ltd as our Merchant of Record. Paddle collects and remits applicable VAT and sales taxes. See our <a href="/terms">Terms</a> for details.</p>
+
+    <h2>Responsible for content</h2>
+    <p>Demian Alexander Venzke, {SITE.company} (address as above).</p>
+
+    <h2>EU online dispute resolution</h2>
+    <p>The European Commission provides a platform for online dispute resolution: <a href="https://ec.europa.eu/consumers/odr" rel="nofollow noopener" target="_blank">ec.europa.eu/consumers/odr</a>. We are not obliged and generally not willing to participate in dispute resolution proceedings before a consumer arbitration board.</p>
+
+    <h2>Liability</h2>
+    <p>Despite careful content control, we assume no liability for the content of external links; their operators are solely responsible for their content.</p>
+  </LegalShell>
+</Base>
