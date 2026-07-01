@@ -379,22 +379,22 @@ const EXTRA: Record<string, {
   consent_text: string; consent_accept: string; consent_decline: string; consent_more: string;
   soon_text: string;
 }> = {
-  en: { nav_features: 'Features', meta_title: 'Cliptag — Sort your clips, keep your flow', meta_desc: 'Cliptag names, tags and sorts your video footage automatically with AI — straight from the SD card into an edit-ready library. Free for 25 clips a month.',
+  en: { nav_features: 'Features', meta_title: 'Cliptag sorts your videos, you keep your flow', meta_desc: 'Cliptag names, tags and sorts your video footage automatically with AI — straight from the SD card into an edit-ready library. Free for 25 clips a month.',
     consent_text: 'We use optional analytics cookies to understand how cliptag.ai is used. They only load if you accept.', consent_accept: 'Accept', consent_decline: 'Decline', consent_more: 'Privacy',
     soon_text: 'Coming soon — the Mac app launches shortly.' },
-  de: { nav_features: 'Funktionen', meta_title: 'Cliptag — Sortier deine Clips, behalte deinen Flow', meta_desc: 'Cliptag benennt, taggt und sortiert dein Footage automatisch mit KI — direkt von der SD-Karte in eine schnittfertige Bibliothek. Kostenlos für 25 Clips im Monat.',
+  de: { nav_features: 'Funktionen', meta_title: 'Cliptag sortiert deine Videos, du behältst deinen Flow', meta_desc: 'Cliptag benennt, taggt und sortiert dein Footage automatisch mit KI — direkt von der SD-Karte in eine schnittfertige Bibliothek. Kostenlos für 25 Clips im Monat.',
     consent_text: 'Wir nutzen optionale Analyse-Cookies, um zu verstehen, wie cliptag.ai genutzt wird. Sie laden nur, wenn du zustimmst.', consent_accept: 'Akzeptieren', consent_decline: 'Ablehnen', consent_more: 'Datenschutz',
     soon_text: 'Bald verfügbar — die Mac-App startet in Kürze.' },
-  fr: { nav_features: 'Fonctions', meta_title: 'Cliptag — Triez vos clips, gardez votre flow', meta_desc: 'Cliptag nomme, tague et trie vos rushes automatiquement avec l\'IA — de la carte SD à une bibliothèque prête à monter. Gratuit pour 25 clips par mois.',
+  fr: { nav_features: 'Fonctions', meta_title: 'Cliptag trie vos vidéos, vous gardez votre flow', meta_desc: 'Cliptag nomme, tague et trie vos rushes automatiquement avec l\'IA — de la carte SD à une bibliothèque prête à monter. Gratuit pour 25 clips par mois.',
     consent_text: 'Nous utilisons des cookies d\'analyse optionnels pour comprendre l\'usage de cliptag.ai. Ils ne se chargent qu\'avec votre accord.', consent_accept: 'Accepter', consent_decline: 'Refuser', consent_more: 'Confidentialité',
     soon_text: 'Bientôt disponible — l\'app Mac arrive très vite.' },
-  es: { nav_features: 'Funciones', meta_title: 'Cliptag — Ordena tus clips, mantén tu flow', meta_desc: 'Cliptag nombra, etiqueta y ordena tu material automáticamente con IA — de la tarjeta SD a una biblioteca lista para editar. Gratis para 25 clips al mes.',
+  es: { nav_features: 'Funciones', meta_title: 'Cliptag ordena tus vídeos, mantienes tu flow', meta_desc: 'Cliptag nombra, etiqueta y ordena tu material automáticamente con IA — de la tarjeta SD a una biblioteca lista para editar. Gratis para 25 clips al mes.',
     consent_text: 'Usamos cookies de análisis opcionales para entender cómo se usa cliptag.ai. Solo se cargan si aceptas.', consent_accept: 'Aceptar', consent_decline: 'Rechazar', consent_more: 'Privacidad',
     soon_text: 'Muy pronto — la app para Mac llega en breve.' },
-  pt: { nav_features: 'Recursos', meta_title: 'Cliptag — Organize seus clipes, mantenha seu flow', meta_desc: 'O Cliptag nomeia, marca e organiza seu material automaticamente com IA — do cartão SD a uma biblioteca pronta para editar. Grátis para 25 clipes por mês.',
+  pt: { nav_features: 'Recursos', meta_title: 'Cliptag organiza seus vídeos, você mantém seu flow', meta_desc: 'O Cliptag nomeia, marca e organiza seu material automaticamente com IA — do cartão SD a uma biblioteca pronta para editar. Grátis para 25 clipes por mês.',
     consent_text: 'Usamos cookies de análise opcionais para entender como o cliptag.ai é usado. Só carregam se você aceitar.', consent_accept: 'Aceitar', consent_decline: 'Recusar', consent_more: 'Privacidade',
     soon_text: 'Em breve — o app para Mac chega já.' },
-  it: { nav_features: 'Funzioni', meta_title: 'Cliptag — Ordina le tue clip, resta nel flow', meta_desc: 'Cliptag nomina, tagga e ordina il tuo materiale automaticamente con l\'IA — dalla scheda SD a una libreria pronta al montaggio. Gratis per 25 clip al mese.',
+  it: { nav_features: 'Funzioni', meta_title: 'Cliptag ordina i tuoi video, mantieni il tuo flow', meta_desc: 'Cliptag nomina, tagga e ordina il tuo materiale automaticamente con l\'IA — dalla scheda SD a una libreria pronta al montaggio. Gratis per 25 clip al mese.',
     consent_text: 'Usiamo cookie di analisi opzionali per capire come viene usato cliptag.ai. Si caricano solo se accetti.', consent_accept: 'Accetta', consent_decline: 'Rifiuta', consent_more: 'Privacy',
     soon_text: 'Presto disponibile — l\'app per Mac arriva a breve.' },
 };
