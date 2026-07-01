@@ -13,7 +13,7 @@ const FEAT3: Record<string, string[]> = {
 export const I18N: Record<string, any> = {
     en: {
       nav_ki: 'AI', nav_pricing: 'Pricing', nav_faq: 'FAQ', nav_signin: 'Sign in', nav_download: 'Download free',
-      hero_title1: 'Sort your clips.', hero_title2: 'Keep your flow.',
+      hero_title1: 'Automatic sorting for your clips.', hero_title2: 'More focus on your flow.',
       hero_sub_pre: 'Done with', hero_sub_post: '. Cliptag names, tags and sorts your footage automatically. You jump straight into editing.',
       hero_cta_primary: 'Download for Mac', hero_cta_secondary: 'How it works',
       hero_fineprint: 'Free for 25 clips a month. No payment details needed.',
@@ -73,7 +73,7 @@ export const I18N: Record<string, any> = {
 
     de: {
       nav_ki: 'KI', nav_pricing: 'Preise', nav_faq: 'FAQ', nav_signin: 'Anmelden', nav_download: 'Kostenlos laden',
-      hero_title1: 'Sortier deine Clips.', hero_title2: 'Behalte deinen Flow.',
+      hero_title1: 'Automatische Sortierung deiner Clips.', hero_title2: 'Mehr Fokus auf deinen Flow.',
       hero_sub_pre: 'Schluss mit', hero_sub_post: '. Cliptag benennt, taggt und sortiert dein Footage automatisch. Du springst direkt in den Schnitt.',
       hero_cta_primary: 'Für Mac laden', hero_cta_secondary: "So funktioniert's",
       hero_fineprint: 'Kostenlos für 25 Clips im Monat. Keine Zahlungsdaten nötig.',
@@ -133,7 +133,7 @@ export const I18N: Record<string, any> = {
 
     fr: {
       nav_ki: 'IA', nav_pricing: 'Tarifs', nav_faq: 'FAQ', nav_signin: 'Connexion', nav_download: 'Télécharger',
-      hero_title1: 'Triez vos clips.', hero_title2: 'Gardez votre flow.',
+      hero_title1: 'Tri automatique de vos clips.', hero_title2: 'Plus de focus sur votre flow.',
       hero_sub_pre: 'Fini les', hero_sub_post: '. Cliptag nomme, tague et trie vos rushes automatiquement. Vous passez direct au montage.',
       hero_cta_primary: 'Télécharger pour Mac', hero_cta_secondary: 'Comment ça marche',
       hero_fineprint: 'Gratuit pour 25 clips par mois. Sans carte bancaire.',
@@ -193,7 +193,7 @@ export const I18N: Record<string, any> = {
 
     es: {
       nav_ki: 'IA', nav_pricing: 'Precios', nav_faq: 'FAQ', nav_signin: 'Iniciar sesión', nav_download: 'Descargar gratis',
-      hero_title1: 'Ordena tus clips.', hero_title2: 'Mantén tu flow.',
+      hero_title1: 'Organización automática de tus clips.', hero_title2: 'Más foco en tu flow.',
       hero_sub_pre: 'Adiós a', hero_sub_post: '. Cliptag nombra, etiqueta y ordena tu material automáticamente. Saltas directo al montaje.',
       hero_cta_primary: 'Descargar para Mac', hero_cta_secondary: 'Cómo funciona',
       hero_fineprint: 'Gratis para 25 clips al mes. Sin datos de pago.',
@@ -253,7 +253,7 @@ export const I18N: Record<string, any> = {
 
     pt: {
       nav_ki: 'IA', nav_pricing: 'Preços', nav_faq: 'FAQ', nav_signin: 'Entrar', nav_download: 'Baixar grátis',
-      hero_title1: 'Organize seus clipes.', hero_title2: 'Mantenha seu flow.',
+      hero_title1: 'Organização automática dos seus clipes.', hero_title2: 'Mais foco no seu flow.',
       hero_sub_pre: 'Chega de', hero_sub_post: '. O Cliptag nomeia, marca e organiza seu material automaticamente. Você vai direto para a edição.',
       hero_cta_primary: 'Baixar para Mac', hero_cta_secondary: 'Como funciona',
       hero_fineprint: 'Grátis para 25 clipes por mês. Sem dados de pagamento.',
@@ -313,7 +313,7 @@ export const I18N: Record<string, any> = {
 
     it: {
       nav_ki: 'IA', nav_pricing: 'Prezzi', nav_faq: 'FAQ', nav_signin: 'Accedi', nav_download: 'Scarica gratis',
-      hero_title1: 'Ordina le tue clip.', hero_title2: 'Resta nel flow.',
+      hero_title1: 'Ordinamento automatico delle tue clip.', hero_title2: 'Più focus sul tuo flow.',
       hero_sub_pre: 'Basta con', hero_sub_post: '. Cliptag nomina, tagga e ordina il tuo materiale automaticamente. Salti dritto al montaggio.',
       hero_cta_primary: 'Scarica per Mac', hero_cta_secondary: 'Come funziona',
       hero_fineprint: 'Gratis per 25 clip al mese. Nessun dato di pagamento.',
