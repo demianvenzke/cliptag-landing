@@ -29,8 +29,8 @@ export const SITE = {
   /** Current shipped macOS app version + direct download. Shown on /account (logged-in
       customers), independent of the marketing `LINKS.download` which stays gated while
       comingSoon. Bump on each notarized release (keep in sync with the appcast). */
-  appVersion: '0.5.4',
-  appDownloadUrl: 'https://cliptag.ai/Cliptag-0.5.4.zip',
+  appVersion: '0.6.0',
+  appDownloadUrl: 'https://cliptag.ai/Cliptag-0.6.0.zip',
 };
 
 /* Real action targets ------------------------------------------------------- */
