@@ -1,5 +1,5 @@
 ---
-import { SITE } from '../config/site';
+import { SITE, POSTHOG } from '../config/site';
 import { LOCALES, DEFAULT_LOCALE, getDict, localePath, type Locale } from '../lib/i18n';
 import ConsentBanner from '../components/ConsentBanner.astro';
 import NotifyModal from '../components/NotifyModal.astro';
@@ -112,10 +112,35 @@ const ogImage = new URL(SITE.ogImage, SITE.origin).href;
         </script>
       </>
     )}
+
+    {/* PostHog product analytics — production only. Stricter than GA: the script is
+        NOT injected until cookie-consent is granted. __ctLoadPostHog is called here on
+        load if consent was already given, and by the ConsentBanner on accept. Session
+        replay masks all inputs and is disabled entirely on /account (email/license). */}
+    {POSTHOG.key && import.meta.env.PROD && (
+      <script is:inline define:vars={{ phKey: POSTHOG.key, phHost: POSTHOG.host }}>
+        (function () {
+          var onAccount = location.pathname.indexOf('/account') === 0;
+          window.__ctLoadPostHog = function () {
+            if (window.posthog && window.posthog.__loaded) return;
+            !function(t,e){var o,n,p,r;e.__SV||(window.posthog&&window.posthog.__loaded)||(window.posthog=e,e._i=[],e.init=function(i,s,a){function g(t,e){var o=e.split(".");2==o.length&&(t=t[o[0]],e=o[1]),t[e]=function(){t.push([e].concat(Array.prototype.slice.call(arguments,0)))}}(p=t.createElement("script")).type="text/javascript",p.crossOrigin="anonymous",p.async=!0,p.src=s.api_host.replace(".i.posthog.com","-assets.i.posthog.com")+"/static/array.js",(r=t.getElementsByTagName("script")[0]).parentNode.insertBefore(p,r);var u=e;for(void 0!==a?u=e[a]=[]:a="posthog",u.people=u.people||[],u.toString=function(t){var e="posthog";return"posthog"!==a&&(e+="."+a),t||(e+=" (stub)"),e},u.people.toString=function(){return u.toString(1)+".people (stub)"},o="init capture identify reset register register_once unregister opt_in_capturing opt_out_capturing has_opted_in_capturing has_opted_out_capturing get_distinct_id get_session_id get_session_replay_url startSessionRecording stopSessionRecording group getFeatureFlag isFeatureEnabled reloadFeatureFlags onFeatureFlags setPersonProperties set_config debug".split(" "),n=0;n<o.length;n++)g(u,o[n]);e._i.push([i,s,a])},e.__SV=1)}(document,window.posthog||[]);
+            window.posthog.init(phKey, {
+              api_host: phHost,
+              person_profiles: 'identified_only',
+              autocapture: true,
+              capture_pageview: true,
+              disable_session_recording: onAccount,
+              session_recording: { maskAllInputs: true, maskTextSelector: '.ph-mask' },
+            });
+          };
+          try { if (localStorage.getItem('ct_consent') === 'granted') window.__ctLoadPostHog(); } catch (e) {}
+        })();
+      </script>
+    )}
   </head>
   <body data-coming-soon={SITE.comingSoon ? '' : undefined}>
     <slot />
-    {SITE.gaId && <ConsentBanner lang={lang} />}
+    {(SITE.gaId || POSTHOG.key) && <ConsentBanner lang={lang} />}
     {SITE.comingSoon && <NotifyModal lang={lang} />}
     <GameOverlay />
 

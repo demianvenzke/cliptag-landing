@@ -111,6 +111,17 @@ export const SUPABASE = {
   proxyBase: 'https://cliptag-proxy.fly.dev',
 };
 
+/* Produkt-Analytics (PostHog, US-Cloud). Der Project-Key ist PUBLIC by design.
+   WICHTIG — strenger als GA: PostHog wird NICHT per Consent-Mode „default denied"
+   geladen, sondern das Script wird ERST NACH erteiltem Cookie-Consent injiziert
+   (siehe Base.astro __ctLoadPostHog + ConsentBanner). Session-Replay: alle Inputs
+   maskiert (maskAllInputs) und auf /account KOMPLETT deaktiviert (E-Mail/Lizenz).
+   Leerer key → PostHog + Consent-Banner-Analytics entfallen. */
+export const POSTHOG = {
+  key: 'phc_tKfCQVBcyA8K8FCDYk28LnY7NS9h7MDYrkrLk8sVuZGo',
+  host: 'https://us.i.posthog.com',
+};
+
 export const PLAN_ORDER: PlanId[] = ['free', 'creator', 'pro', 'studio'];
 
 /** Default billing cycle shown on load. */

@@ -28,9 +28,11 @@ const t = getDict(lang);
     const close = (v: string) => {
       try { localStorage.setItem('ct_consent', v); } catch {}
       el.style.display = 'none';
-      const g = (window as any).gtag;
-      if (v === 'granted' && typeof g === 'function') {
-        g('consent', 'update', { analytics_storage: 'granted' });
+      if (v === 'granted') {
+        const g = (window as any).gtag;
+        if (typeof g === 'function') g('consent', 'update', { analytics_storage: 'granted' });
+        // PostHog is injected only now (on opt-in), never before — see Base.astro.
+        try { (window as any).__ctLoadPostHog?.(); } catch {}
       }
     };
     document.getElementById('ct-consent-accept')?.addEventListener('click', () => close('granted'));
