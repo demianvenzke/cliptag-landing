@@ -11,10 +11,10 @@ export const SITE = {
   company: 'Framepass LLC',
   contactEmail: 'hello@framepass.io',
   /** Pre-launch: emits <meta name="robots" content="noindex,nofollow">. Set false at launch. */
-  preLaunch: true,
+  preLaunch: false,
   /** While true, placeholder CTAs (href="#") open the "coming soon" + notify-me modal
       instead of navigating. Set false once the real download/auth/checkout URLs are filled in. */
-  comingSoon: true,
+  comingSoon: false,
   /** Web3Forms access key for the launch notify-me form (https://web3forms.com).
       Tied to demian@framepass.io — each opt-in is emailed there. Empty = form hidden.
       The key is public/client-side by design (it only routes to your inbox). */
@@ -36,11 +36,11 @@ export const SITE = {
 /* Real action targets ------------------------------------------------------- */
 export const LINKS = {
   /** Signed + notarized macOS download (.dmg/.zip) or App Store URL. */
-  download: '#', // TODO
+  download: 'https://cliptag.ai/Cliptag-0.6.1.dmg',
   /** Account / auth login URL. */
-  signin: '#', // TODO
+  signin: 'https://cliptag.ai/account',
   /** Free-plan CTA target. Usually the same as `download`. */
-  freeCta: '#', // TODO (defaults conceptually to download)
+  freeCta: 'https://cliptag.ai/Cliptag-0.6.1.dmg',
 };
 
 /* Pricing ------------------------------------------------------------------- */
