@@ -284,9 +284,10 @@ document.addEventListener(
     const a = el && el.closest ? el.closest('a[href*=".dmg"]') : null;
     if (!a) return;
     const file = (a.getAttribute('href') || '').split('/').pop() || 'Cliptag.dmg';
+    const ver = (file.match(/(\d+\.\d+\.\d+)/) || [])[1] || ''; // aus Dateinamen -> kein Hardcoding
     const w: any = window;
-    try { w.gtag && w.gtag('event', 'download', { file_name: file, app_version: '0.6.1' }); } catch (_) {}
-    try { w.posthog && w.posthog.capture && w.posthog.capture('app_download', { version: '0.6.1', platform: 'mac', file }); } catch (_) {}
+    try { w.gtag && w.gtag('event', 'download', { file_name: file, app_version: ver }); } catch (_) {}
+    try { w.posthog && w.posthog.capture && w.posthog.capture('app_download', { version: ver, platform: 'mac', file }); } catch (_) {}
   },
   true,
 );
