@@ -47,9 +47,9 @@ export const I18N: Record<string, any> = {
         { title: 'AI does the work', body: 'Title, scene, role, tags and technical specs, per clip.' },
         { title: 'Done', body: 'Named folders with Finder tags. Edit-ready.' }
       ],
-      demoCaps: ['Detecting scene · Sunset', 'Reading environment · Indoor', 'Finding subjects · Underwater', 'Transcribing speech…', 'Detecting motion · Slow-mo'],
-      demoTitles: ['Skyline Sunset — Aerial Reveal', 'Bangkok Departure — Handheld', 'Reef Dive — POV Action', 'Studio Interview — A-roll', 'Surf Lineup — Long Lens'],
-      demoTags: [['Drone','Golden Hour','Cityscape'], ['Travel','Indoor','Daytime'], ['Underwater','POV','Wide'], ['Interview','Studio','Talking Head'], ['Ocean','Slow-mo','Telephoto']],
+      demoCaps: ['Detecting scene · Sunset', 'Reading environment · Street', 'Finding subjects · Underwater', 'Transcribing speech…', 'Detecting camera · Drone'],
+      demoTitles: ['Skyline at sunset', 'Street scene in Bangkok', 'Reef dive', 'Luke - Dad Reveal', 'Studio interview'],
+      demoTags: [['Drone','City','Golden Hour'], ['Travel','Street','Daytime'], ['Underwater','Coral','Ocean'], ['Reveal','Cloud City','Plot Twist'], ['Interview','Studio','A-Roll']],
       plans: [
         { cta: 'Start free', clipsNum: '25 clips', clipsUnit: '/ per month', per: '', billedM: 'forever', billedY: 'forever', feats: FEAT3.en.concat(['Rollover buffer']) },
         { cta: 'Choose Creator', clipsNum: '500 clips', clipsUnit: '/ per month', per: '/mo', billedM: 'billed monthly', billedY: '$79/yr billed', feats: FEAT3.en.concat(['Rollover up to 1,000 clips']) },
@@ -108,9 +108,9 @@ export const I18N: Record<string, any> = {
         { title: 'KI macht die Arbeit', body: 'Titel, Szene, Rolle, Tags und technische Specs, pro Clip.' },
         { title: 'Fertig', body: 'Benannte Ordner mit Finder-Tags. Schnittfertig.' }
       ],
-      demoCaps: ['Erkenne Szene · Sonnenuntergang', 'Lese Umgebung · Innenraum', 'Finde Motive · Unterwasser', 'Transkribiere Sprache…', 'Erkenne Bewegung · Slow-Mo'],
-      demoTitles: ['Skyline-Sonnenuntergang — Luftaufnahme', 'Aufbruch Bangkok — Handheld', 'Riff-Tauchgang — POV-Action', 'Studio-Interview — A-Roll', 'Surf-Lineup — Teleobjektiv'],
-      demoTags: [['Drohne','Goldene Stunde','Stadtbild'], ['Reise','Innenraum','Tag'], ['Unterwasser','POV','Weitwinkel'], ['Interview','Studio','Talking Head'], ['Ozean','Slow-Mo','Teleobjektiv']],
+      demoCaps: ['Erkenne Szene · Sonnenuntergang', 'Lese Umgebung · Straße', 'Finde Motive · Unterwasser', 'Transkribiere Sprache…', 'Erkenne Kameratyp · Drohne'],
+      demoTitles: ['Skyline im Sonnenuntergang', 'Straßenszene in Bangkok', 'Riff-Tauchgang', 'Luke - Dad Reveal', 'Studio-Interview'],
+      demoTags: [['Drohne','Stadt','Goldene Stunde'], ['Reise','Straße','Tag'], ['Unterwasser','Korallen','Meer'], ['Reveal','Cloud City','Plot Twist'], ['Interview','Studio','A-Roll']],
       plans: [
         { cta: 'Kostenlos starten', clipsNum: '25 Clips', clipsUnit: '/ pro Monat', per: '', billedM: 'für immer', billedY: 'für immer', feats: FEAT3.de.concat(['Rollover-Buffer']) },
         { cta: 'Creator wählen', clipsNum: '500 Clips', clipsUnit: '/ pro Monat', per: '/Mon', billedM: 'monatlich abgerechnet', billedY: '€79/Jahr abgerechnet', feats: FEAT3.de.concat(['Rollover bis 1.000 Clips']) },
@@ -169,9 +169,9 @@ export const I18N: Record<string, any> = {
         { title: 'L\'IA fait le travail', body: 'Titre, scène, rôle, tags et specs techniques, par clip.' },
         { title: 'Terminé', body: 'Dossiers nommés avec tags Finder. Prêt à monter.' }
       ],
-      demoCaps: ['Détecte la scène · Coucher de soleil', 'Lit l\'environnement · Intérieur', 'Trouve les sujets · Sous l\'eau', 'Transcrit la parole…', 'Détecte le mouvement · Ralenti'],
-      demoTitles: ['Coucher de soleil sur la skyline — Vue aérienne', 'Départ de Bangkok — Caméra à la main', 'Plongée sur le récif — Action POV', 'Interview studio — A-roll', 'Line-up de surf — Téléobjectif'],
-      demoTags: [['Drone','Heure dorée','Paysage urbain'], ['Voyage','Intérieur','Jour'], ['Sous l\'eau','POV','Grand-angle'], ['Interview','Studio','Plan-buste'], ['Océan','Ralenti','Téléobjectif']],
+      demoCaps: ['Détecte la scène · Coucher de soleil', 'Lit l\'environnement · Rue', 'Trouve les sujets · Sous l\'eau', 'Transcrit la parole…', 'Détecte la caméra · Drone'],
+      demoTitles: ['Skyline au coucher de soleil', 'Scène de rue à Bangkok', 'Plongée sur le récif', 'Luke - Dad Reveal', 'Interview en studio'],
+      demoTags: [['Drone','Ville','Heure dorée'], ['Voyage','Rue','Jour'], ['Sous l\'eau','Corail','Océan'], ['Reveal','Cloud City','Plot Twist'], ['Interview','Studio','A-Roll']],
       plans: [
         { cta: 'Commencer gratuitement', clipsNum: '25 clips', clipsUnit: '/ par mois', per: '', billedM: 'pour toujours', billedY: 'pour toujours', feats: FEAT3.fr.concat(['Report de crédits']) },
         { cta: 'Choisir Creator', clipsNum: '500 clips', clipsUnit: '/ par mois', per: '/mois', billedM: 'facturé au mois', billedY: '79 €/an facturé', feats: FEAT3.fr.concat(['Report jusqu\'à 1 000 clips']) },
@@ -230,9 +230,9 @@ export const I18N: Record<string, any> = {
         { title: 'La IA hace el trabajo', body: 'Título, escena, rol, etiquetas y specs técnicas, por clip.' },
         { title: 'Listo', body: 'Carpetas nombradas con etiquetas de Finder. Listo para editar.' }
       ],
-      demoCaps: ['Detectando escena · Atardecer', 'Leyendo entorno · Interior', 'Buscando sujetos · Bajo el agua', 'Transcribiendo habla…', 'Detectando movimiento · Cámara lenta'],
-      demoTitles: ['Atardecer en el skyline — Toma aérea', 'Salida de Bangkok — Cámara en mano', 'Buceo en el arrecife — Acción POV', 'Entrevista en estudio — A-roll', 'Lineup de surf — Teleobjetivo'],
-      demoTags: [['Dron','Hora dorada','Paisaje urbano'], ['Viaje','Interior','Día'], ['Bajo el agua','POV','Gran angular'], ['Entrevista','Estudio','Primer plano'], ['Océano','Cámara lenta','Teleobjetivo']],
+      demoCaps: ['Detectando escena · Atardecer', 'Leyendo entorno · Calle', 'Buscando sujetos · Bajo el agua', 'Transcribiendo habla…', 'Detectando cámara · Dron'],
+      demoTitles: ['Skyline al atardecer', 'Escena callejera en Bangkok', 'Buceo en el arrecife', 'Luke - Dad Reveal', 'Entrevista en estudio'],
+      demoTags: [['Dron','Ciudad','Hora dorada'], ['Viaje','Calle','Día'], ['Bajo el agua','Coral','Océano'], ['Reveal','Cloud City','Plot Twist'], ['Entrevista','Estudio','A-Roll']],
       plans: [
         { cta: 'Empezar gratis', clipsNum: '25 clips', clipsUnit: '/ al mes', per: '', billedM: 'para siempre', billedY: 'para siempre', feats: FEAT3.es.concat(['Crédito acumulable']) },
         { cta: 'Elegir Creator', clipsNum: '500 clips', clipsUnit: '/ al mes', per: '/mes', billedM: 'facturado al mes', billedY: '79 €/año facturado', feats: FEAT3.es.concat(['Acumulación hasta 1.000 clips']) },
@@ -291,9 +291,9 @@ export const I18N: Record<string, any> = {
         { title: 'A IA faz o trabalho', body: 'Título, cena, função, tags e specs técnicas, por clipe.' },
         { title: 'Pronto', body: 'Pastas nomeadas com tags do Finder. Prontas para editar.' }
       ],
-      demoCaps: ['Detectando cena · Pôr do sol', 'Lendo ambiente · Interior', 'Encontrando sujeitos · Subaquático', 'Transcrevendo fala…', 'Detectando movimento · Câmera lenta'],
-      demoTitles: ['Pôr do sol na skyline — Tomada aérea', 'Partida de Bangkok — Câmera na mão', 'Mergulho no recife — Ação POV', 'Entrevista em estúdio — A-roll', 'Lineup de surfe — Teleobjetiva'],
-      demoTags: [['Drone','Hora dourada','Paisagem urbana'], ['Viagem','Interior','Dia'], ['Subaquático','POV','Grande angular'], ['Entrevista','Estúdio','Plano médio'], ['Oceano','Câmera lenta','Teleobjetiva']],
+      demoCaps: ['Detectando cena · Pôr do sol', 'Lendo ambiente · Rua', 'Encontrando sujeitos · Subaquático', 'Transcrevendo fala…', 'Detectando câmera · Drone'],
+      demoTitles: ['Skyline ao pôr do sol', 'Cena de rua em Bangkok', 'Mergulho no recife', 'Luke - Dad Reveal', 'Entrevista em estúdio'],
+      demoTags: [['Drone','Cidade','Hora dourada'], ['Viagem','Rua','Dia'], ['Subaquático','Coral','Oceano'], ['Reveal','Cloud City','Plot Twist'], ['Entrevista','Estúdio','A-Roll']],
       plans: [
         { cta: 'Começar grátis', clipsNum: '25 clipes', clipsUnit: '/ por mês', per: '', billedM: 'para sempre', billedY: 'para sempre', feats: FEAT3.pt.concat(['Créditos acumuláveis']) },
         { cta: 'Escolher Creator', clipsNum: '500 clipes', clipsUnit: '/ por mês', per: '/mês', billedM: 'cobrado por mês', billedY: '€79/ano cobrado', feats: FEAT3.pt.concat(['Acúmulo até 1.000 clipes']) },
@@ -352,9 +352,9 @@ export const I18N: Record<string, any> = {
         { title: 'L\'IA fa il lavoro', body: 'Titolo, scena, ruolo, tag e specifiche tecniche, per ogni clip.' },
         { title: 'Fatto', body: 'Cartelle nominate con tag Finder. Pronte al montaggio.' }
       ],
-      demoCaps: ['Rilevo la scena · Tramonto', 'Leggo l\'ambiente · Interno', 'Trovo i soggetti · Subacqueo', 'Trascrivo il parlato…', 'Rilevo il movimento · Slow-mo'],
-      demoTitles: ['Tramonto sullo skyline — Ripresa aerea', 'Partenza da Bangkok — A mano', 'Immersione nella barriera — Azione POV', 'Intervista in studio — A-roll', 'Lineup di surf — Teleobiettivo'],
-      demoTags: [['Drone','Ora dorata','Paesaggio urbano'], ['Viaggio','Interno','Giorno'], ['Subacqueo','POV','Grandangolo'], ['Intervista','Studio','Primo piano'], ['Oceano','Slow-mo','Teleobiettivo']],
+      demoCaps: ['Rilevo la scena · Tramonto', 'Leggo l\'ambiente · Strada', 'Trovo i soggetti · Subacqueo', 'Trascrivo il parlato…', 'Rilevo la camera · Drone'],
+      demoTitles: ['Skyline al tramonto', 'Scena di strada a Bangkok', 'Immersione nella barriera', 'Luke - Dad Reveal', 'Intervista in studio'],
+      demoTags: [['Drone','Città','Ora dorata'], ['Viaggio','Strada','Giorno'], ['Subacqueo','Corallo','Oceano'], ['Reveal','Cloud City','Plot Twist'], ['Intervista','Studio','A-Roll']],
       plans: [
         { cta: 'Inizia gratis', clipsNum: '25 clip', clipsUnit: '/ al mese', per: '', billedM: 'per sempre', billedY: 'per sempre', feats: FEAT3.it.concat(['Crediti riportabili']) },
         { cta: 'Scegli Creator', clipsNum: '500 clip', clipsUnit: '/ al mese', per: '/mese', billedM: 'fatturato al mese', billedY: '€79/anno fatturato', feats: FEAT3.it.concat(['Riporto fino a 1.000 clip']) },
