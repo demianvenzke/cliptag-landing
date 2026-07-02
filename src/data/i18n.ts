@@ -57,7 +57,7 @@ export const I18N: Record<string, any> = {
         { cta: 'Choose Studio', clipsNum: '10,000 clips', clipsUnit: '/ per month', per: '/mo', billedM: 'billed monthly', billedY: '$399/yr billed', feats: FEAT3.en.concat(['Everything in Pro', 'Highest cloud volume']) }
       ],
       faq: [
-        ['Can I use Cliptag for free?', 'Yes. The Free plan includes 25 AI clips per month, with no payment details. When you need more volume, you switch to a paid plan anytime.'],
+        ['Can I use Cliptag for free?', 'Yes. The Free plan includes 25 AI clips per month, with no payment details. When you need more volume, you switch to a paid plan anytime. And local mode stays free and unlimited — fully on-device (Apple Silicon), a bit coarser than the cloud.'],
         ['How does Cliptag work?', 'You drag a folder into Cliptag. The AI recognizes scenes, subjects and spoken language, names and tags every clip and sorts everything into folders. In the end you place the edit-ready library on your drive.'],
         ['Can I use Cliptag locally?', 'Yes. Local mode analyzes fully offline on your Mac, nothing leaves the device. Recognition is a bit coarser than in the cloud, but sensitive footage stays private.'],
         ['What are the requirements for the local mode?', 'The local mode runs on Apple Silicon (M1 or newer). We recommend at least 16 GB of unified memory and around 10 GB of free disk space for the on-device model; the more memory, the faster and more accurate it runs. Cliptag uses the Apple Silicon GPU and Neural Engine. On older Intel Macs the local mode is limited or unavailable, so the cloud is the better choice there.'],
@@ -118,7 +118,7 @@ export const I18N: Record<string, any> = {
         { cta: 'Studio wählen', clipsNum: '10.000 Clips', clipsUnit: '/ pro Monat', per: '/Mon', billedM: 'monatlich abgerechnet', billedY: '€399/Jahr abgerechnet', feats: FEAT3.de.concat(['Alles aus Pro', 'Höchstes Cloud-Volumen']) }
       ],
       faq: [
-        ['Kann ich Cliptag kostenlos nutzen?', 'Ja. Der Free-Plan umfasst 25 KI-Clips pro Monat, ganz ohne Zahlungsdaten. Wenn du mehr Volumen brauchst, wechselst du jederzeit in einen bezahlten Plan.'],
+        ['Kann ich Cliptag kostenlos nutzen?', 'Ja. Der Free-Plan umfasst 25 KI-Clips pro Monat, ganz ohne Zahlungsdaten. Wenn du mehr Volumen brauchst, wechselst du jederzeit in einen bezahlten Plan. Und der Lokal-Modus bleibt gratis und unbegrenzt — komplett on-device (Apple Silicon), etwas gröber als die Cloud.'],
         ['Wie funktioniert Cliptag?', 'Du ziehst einen Ordner in Cliptag. Die KI erkennt Szenen, Motive und gesprochene Sprache, benennt und taggt jeden Clip und sortiert alles in Ordner. Am Ende legst du die schnittfertige Bibliothek auf deiner Platte ab.'],
         ['Kann ich Cliptag lokal nutzen?', 'Ja. Der Lokal-Modus analysiert komplett offline auf deinem Mac, nichts verlässt das Gerät. Die Erkennung ist etwas gröber als in der Cloud, dafür bleiben sensible Aufnahmen privat.'],
         ['Welche Voraussetzungen hat der Lokal-Modus?', 'Der Lokal-Modus läuft auf Apple Silicon (M1 oder neuer). Wir empfehlen mindestens 16 GB Unified Memory und rund 10 GB freien Speicher für das lokale Modell; je mehr Arbeitsspeicher, desto schneller und genauer. Cliptag nutzt die GPU und Neural Engine von Apple Silicon. Auf älteren Intel-Macs ist der Lokal-Modus eingeschränkt oder nicht verfügbar, dort ist die Cloud die bessere Wahl.'],
@@ -179,7 +179,7 @@ export const I18N: Record<string, any> = {
         { cta: 'Choisir Studio', clipsNum: '10 000 clips', clipsUnit: '/ par mois', per: '/mois', billedM: 'facturé au mois', billedY: '399 €/an facturé', feats: FEAT3.fr.concat(['Tout de Pro', 'Volume cloud maximal']) }
       ],
       faq: [
-        ['Puis-je utiliser Cliptag gratuitement ?', 'Oui. L\'offre gratuite inclut 25 clips IA par mois, sans données de paiement. Quand vous avez besoin de plus de volume, vous passez à une offre payante quand vous voulez.'],
+        ['Puis-je utiliser Cliptag gratuitement ?', 'Oui. L\'offre gratuite inclut 25 clips IA par mois, sans données de paiement. Quand vous avez besoin de plus de volume, vous passez à une offre payante quand vous voulez. Et le mode local reste gratuit et illimité — entièrement sur l\'appareil (Apple Silicon), un peu moins précis que le cloud.'],
         ['Comment fonctionne Cliptag ?', 'Vous glissez un dossier dans Cliptag. L\'IA reconnaît les scènes, les sujets et la parole, nomme et tague chaque clip et trie tout en dossiers. À la fin, vous placez la bibliothèque prête à monter sur votre disque.'],
         ['Puis-je utiliser Cliptag en local ?', 'Oui. Le mode local analyse entièrement hors ligne sur votre Mac, rien ne quitte l\'appareil. La reconnaissance est un peu plus grossière que dans le cloud, mais les rushes sensibles restent privés.'],
         ['Quelles sont les conditions pour le mode local ?', 'Le mode local fonctionne sur Apple Silicon (M1 ou plus récent). Nous recommandons au moins 16 Go de mémoire unifiée et environ 10 Go d\'espace disque libre pour le modèle local ; plus il y a de mémoire, plus c\'est rapide et précis. Cliptag utilise le GPU et le Neural Engine d\'Apple Silicon. Sur les anciens Mac Intel, le mode local est limité ou indisponible, le cloud est alors préférable.'],
@@ -240,7 +240,7 @@ export const I18N: Record<string, any> = {
         { cta: 'Elegir Studio', clipsNum: '10.000 clips', clipsUnit: '/ al mes', per: '/mes', billedM: 'facturado al mes', billedY: '399 €/año facturado', feats: FEAT3.es.concat(['Todo de Pro', 'Máximo volumen en la nube']) }
       ],
       faq: [
-        ['¿Puedo usar Cliptag gratis?', 'Sí. El plan gratuito incluye 25 clips IA al mes, sin datos de pago. Cuando necesitas más volumen, cambias a un plan de pago cuando quieras.'],
+        ['¿Puedo usar Cliptag gratis?', 'Sí. El plan gratuito incluye 25 clips IA al mes, sin datos de pago. Cuando necesitas más volumen, cambias a un plan de pago cuando quieras. Y el modo local es siempre gratis e ilimitado — todo en el dispositivo (Apple Silicon), un poco menos preciso que la nube.'],
         ['¿Cómo funciona Cliptag?', 'Arrastras una carpeta a Cliptag. La IA reconoce escenas, sujetos y habla, nombra y etiqueta cada clip y lo ordena todo en carpetas. Al final colocas la biblioteca lista para editar en tu disco.'],
         ['¿Puedo usar Cliptag en local?', 'Sí. El modo local analiza por completo sin conexión en tu Mac, nada sale del dispositivo. El reconocimiento es algo más tosco que en la nube, pero el material sensible se queda privado.'],
         ['¿Qué requisitos tiene el modo local?', 'El modo local funciona en Apple Silicon (M1 o posterior). Recomendamos al menos 16 GB de memoria unificada y unos 10 GB de espacio libre para el modelo local; cuanta más memoria, más rápido y preciso. Cliptag usa la GPU y el Neural Engine de Apple Silicon. En Mac Intel antiguos el modo local es limitado o no está disponible, así que la nube es la mejor opción.'],
@@ -301,7 +301,7 @@ export const I18N: Record<string, any> = {
         { cta: 'Escolher Studio', clipsNum: '10.000 clipes', clipsUnit: '/ por mês', per: '/mês', billedM: 'cobrado por mês', billedY: '€399/ano cobrado', feats: FEAT3.pt.concat(['Tudo do Pro', 'Volume máximo na nuvem']) }
       ],
       faq: [
-        ['Posso usar o Cliptag de graça?', 'Sim. O plano gratuito inclui 25 clipes de IA por mês, sem dados de pagamento. Quando precisar de mais volume, você muda para um plano pago quando quiser.'],
+        ['Posso usar o Cliptag de graça?', 'Sim. O plano gratuito inclui 25 clipes de IA por mês, sem dados de pagamento. Quando precisar de mais volume, você muda para um plano pago quando quiser. E o modo local continua grátis e ilimitado — totalmente no dispositivo (Apple Silicon), um pouco mais grosseiro que a nuvem.'],
         ['Como o Cliptag funciona?', 'Você arrasta uma pasta para o Cliptag. A IA reconhece cenas, sujeitos e fala, nomeia e marca cada clipe e organiza tudo em pastas. No fim, você coloca a biblioteca pronta para editar no seu disco.'],
         ['Posso usar o Cliptag localmente?', 'Sim. O modo local analisa totalmente offline no seu Mac, nada sai do aparelho. O reconhecimento é um pouco mais grosseiro que na nuvem, mas o material sensível permanece privado.'],
         ['Quais são os requisitos do modo local?', 'O modo local funciona em Apple Silicon (M1 ou mais recente). Recomendamos pelo menos 16 GB de memória unificada e cerca de 10 GB de espaço livre para o modelo local; quanto mais memória, mais rápido e preciso. O Cliptag usa a GPU e o Neural Engine do Apple Silicon. Em Macs Intel antigos o modo local é limitado ou indisponível, então a nuvem é a melhor escolha.'],
@@ -362,7 +362,7 @@ export const I18N: Record<string, any> = {
         { cta: 'Scegli Studio', clipsNum: '10.000 clip', clipsUnit: '/ al mese', per: '/mese', billedM: 'fatturato al mese', billedY: '€399/anno fatturato', feats: FEAT3.it.concat(['Tutto di Pro', 'Massimo volume cloud']) }
       ],
       faq: [
-        ['Posso usare Cliptag gratis?', 'Sì. Il piano gratuito include 25 clip IA al mese, senza dati di pagamento. Quando ti serve più volume, passi a un piano a pagamento quando vuoi.'],
+        ['Posso usare Cliptag gratis?', 'Sì. Il piano gratuito include 25 clip IA al mese, senza dati di pagamento. Quando ti serve più volume, passi a un piano a pagamento quando vuoi. E la modalità locale resta gratuita e illimitata — tutto sul dispositivo (Apple Silicon), un po\' più grossolana del cloud.'],
         ['Come funziona Cliptag?', 'Trascini una cartella in Cliptag. L\'IA riconosce scene, soggetti e parlato, nomina e tagga ogni clip e ordina tutto in cartelle. Alla fine metti la libreria pronta al montaggio sul tuo disco.'],
         ['Posso usare Cliptag in locale?', 'Sì. La modalità locale analizza completamente offline sul tuo Mac, niente lascia il dispositivo. Il riconoscimento è un po\' più grezzo del cloud, ma il materiale sensibile resta privato.'],
         ['Quali requisiti ha la modalità locale?', 'La modalità locale funziona su Apple Silicon (M1 o più recente). Consigliamo almeno 16 GB di memoria unificata e circa 10 GB di spazio libero per il modello locale; più memoria, più velocità e precisione. Cliptag usa la GPU e il Neural Engine di Apple Silicon. Sui vecchi Mac Intel la modalità locale è limitata o non disponibile, quindi il cloud è la scelta migliore.'],
