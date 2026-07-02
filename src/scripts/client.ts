@@ -273,3 +273,20 @@ const reduced =
     });
   });
 })();
+
+/* Download-Tracking: Klick auf einen .dmg-Link → benanntes Event in GA + PostHog.
+   Fire-and-forget (blockiert den Download NICHT); beide Tools sind consent-gated,
+   die Aufrufe sind bei fehlendem Consent/Load harmlose No-ops. */
+document.addEventListener(
+  'click',
+  (e) => {
+    const el: any = e.target;
+    const a = el && el.closest ? el.closest('a[href*=".dmg"]') : null;
+    if (!a) return;
+    const file = (a.getAttribute('href') || '').split('/').pop() || 'Cliptag.dmg';
+    const w: any = window;
+    try { w.gtag && w.gtag('event', 'download', { file_name: file, app_version: '0.6.1' }); } catch (_) {}
+    try { w.posthog && w.posthog.capture && w.posthog.capture('app_download', { version: '0.6.1', platform: 'mac', file }); } catch (_) {}
+  },
+  true,
+);
