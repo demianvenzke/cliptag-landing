@@ -30,13 +30,14 @@ if grep -rIlq 'REPLACE_WITH_SUPABASE_ANON_KEY' dist/ 2>/dev/null; then
 fi
 
 echo "▸ Deploying dist/ → ${SSH}:${TARGET}"
-# WICHTIG: Die Sparkle-Release-Dateien (appcast.xml, Cliptag-*.zip, *.delta) liegen im selben
-# Web-Root, sind aber NICHT Teil des Astro-Builds. Ohne diese --exclude würde `--delete` sie beim
-# Landing-Deploy löschen → Update-Feed kaputt ("Update Error" in der App). NICHT entfernen.
+# WICHTIG: Die Release-Dateien (appcast.xml, Cliptag-*.zip, *.delta = Sparkle-OTA; Cliptag-*.dmg =
+# Erst-Download) liegen im selben Web-Root, sind aber NICHT Teil des Astro-Builds. Ohne diese
+# --exclude würde `--delete` sie beim Landing-Deploy löschen → Update-Feed + Download kaputt. NICHT entfernen.
 rsync -avz --delete --human-readable \
   --exclude '.DS_Store' \
   --exclude 'appcast.xml' \
   --exclude 'Cliptag-*.zip' \
+  --exclude 'Cliptag-*.dmg' \
   --exclude 'Cliptag*.delta' \
   dist/ "${SSH}:${TARGET}/"
 
