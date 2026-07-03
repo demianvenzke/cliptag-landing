@@ -22,15 +22,33 @@ const t = getDict(lang);
     if (!el) return;
     let saved: string | null = null;
     try { saved = localStorage.getItem('ct_consent'); } catch {}
+    // Only PROMPT visitors likely in the EEA/UK/CH — everywhere else consent is granted
+    // by default (see Base.astro) so no banner is needed. Timezone heuristic: privacy-
+    // friendly (no IP lookup, no third party). IMPORTANT: this only decides whether the
+    // opt-in banner SHOWS; the real consent gate is Google's IP-based region default, so a
+    // wrong timezone can never cause non-compliant tracking (worst case: a mislocated EEA
+    // user can't opt in and simply stays denied). Europe/* covers all mainland EEA/UK/CH;
+    // the extras catch IS/CY/PT-islands/ES-Canary+Ceuta which live outside the Europe/ prefix.
+    const inConsentRegion = () => {
+      try {
+        const tz = Intl.DateTimeFormat().resolvedOptions().timeZone || '';
+        if (tz.indexOf('Europe/') === 0) return true;
+        return ['Atlantic/Reykjavik', 'Atlantic/Azores', 'Atlantic/Madeira', 'Atlantic/Canary', 'Asia/Nicosia', 'Asia/Famagusta', 'Africa/Ceuta'].indexOf(tz) !== -1;
+      } catch { return true; } // detection failed → show the banner (safe default)
+    };
     // NOTE: toggle via style.display, not the `hidden` attribute — the element's
     // inline `display` would override `[hidden]{display:none}` and never hide it.
-    if (!saved) el.style.display = 'flex';
+    if (!saved && inConsentRegion()) el.style.display = 'flex';
+    const GRANT = { ad_storage: 'granted', ad_user_data: 'granted', ad_personalization: 'granted', analytics_storage: 'granted' };
+    const DENY  = { ad_storage: 'denied',  ad_user_data: 'denied',  ad_personalization: 'denied',  analytics_storage: 'denied' };
     const close = (v: string) => {
       try { localStorage.setItem('ct_consent', v); } catch {}
       el.style.display = 'none';
+      const g = (window as any).gtag;
+      // Consent Mode v2: signal the full choice in BOTH directions. Decline → denied also
+      // overrides the geo "granted-by-default" that applies outside the EEA/UK/CH.
+      if (typeof g === 'function') g('consent', 'update', v === 'granted' ? GRANT : DENY);
       if (v === 'granted') {
-        const g = (window as any).gtag;
-        if (typeof g === 'function') g('consent', 'update', { analytics_storage: 'granted' });
         // PostHog is injected only now (on opt-in), never before — see Base.astro.
         try { (window as any).__ctLoadPostHog?.(); } catch {}
       }

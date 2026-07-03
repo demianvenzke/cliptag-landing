@@ -92,7 +92,8 @@ const ogImage = new URL(SITE.ogImage, SITE.origin).href;
 
     {faqLd && <script type="application/ld+json" set:html={JSON.stringify(faqLd)} />}
 
-    {/* Google Analytics — production only, behind Consent Mode v2 (default denied). */}
+    {/* Google Analytics — production only, behind Consent Mode v2 (geo-gated: GRANTED by
+        default outside the EEA/UK/CH, DENIED by default inside — banner required there). */}
     {SITE.gaId && import.meta.env.PROD && (
       <>
         <script async src={`https://www.googletagmanager.com/gtag/js?id=${SITE.gaId}`}></script>
@@ -101,12 +102,28 @@ const ogImage = new URL(SITE.ogImage, SITE.origin).href;
           // Assign to window explicitly: Astro wraps define:vars scripts in an IIFE,
           // so a bare `function gtag` would not be global (the consent banner needs it).
           window.gtag = function(){ dataLayer.push(arguments); };
+          // Consent Mode v2 — geo-gated. GRANTED by default everywhere; a second default
+          // scopes a STRICTER 'denied' to the EEA/UK/CH (most-specific region default wins
+          // there). wait_for_update must be on BOTH defaults — it is per-command, not merged,
+          // so the region default needs its own or first-time EEA tags won't wait for the banner.
           gtag('consent', 'default', {
-            ad_storage: 'denied', analytics_storage: 'denied',
-            ad_user_data: 'denied', ad_personalization: 'denied',
+            ad_storage: 'granted', ad_user_data: 'granted',
+            ad_personalization: 'granted', analytics_storage: 'granted',
             wait_for_update: 500,
           });
-          try { if (localStorage.getItem('ct_consent') === 'granted') gtag('consent', 'update', { analytics_storage: 'granted' }); } catch (e) {}
+          gtag('consent', 'default', {
+            ad_storage: 'denied', ad_user_data: 'denied',
+            ad_personalization: 'denied', analytics_storage: 'denied',
+            wait_for_update: 500,
+            region: ['AT','BE','BG','HR','CY','CZ','DK','EE','FI','FR','DE','GR','HU','IE','IT','LV','LT','LU','MT','NL','PL','PT','RO','SK','SI','ES','SE','IS','LI','NO','GB','CH'],
+          });
+          // Re-apply an explicit prior choice — overrides the geo default in BOTH directions
+          // (so a visitor OUTSIDE the EEA who declined stays denied on later visits too).
+          try {
+            var ctC = localStorage.getItem('ct_consent');
+            if (ctC === 'granted') gtag('consent', 'update', { ad_storage: 'granted', ad_user_data: 'granted', ad_personalization: 'granted', analytics_storage: 'granted' });
+            else if (ctC === 'denied') gtag('consent', 'update', { ad_storage: 'denied', ad_user_data: 'denied', ad_personalization: 'denied', analytics_storage: 'denied' });
+          } catch (e) {}
           gtag('js', new Date());
           gtag('config', gaId, { anonymize_ip: true });
         </script>
