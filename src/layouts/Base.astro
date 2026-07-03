@@ -126,6 +126,10 @@ const ogImage = new URL(SITE.ogImage, SITE.origin).href;
           } catch (e) {}
           gtag('js', new Date());
           gtag('config', gaId, { anonymize_ip: true });
+          // Google Ads — SAME gtag.js loader + SAME Consent Mode defaults above. No second
+          // loader needed. Conversion events (send_to: 'AW-18295668284/<label>') fire from the
+          // download CTA (primary) and Paddle purchase (secondary) — see client.ts.
+          gtag('config', 'AW-18295668284');
         </script>
       </>
     )}
