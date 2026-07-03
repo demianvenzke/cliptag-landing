@@ -290,6 +290,28 @@ const reduced =
         .catch(() => {});
     });
   });
+
+  /* Deep-Link aus der Cliptag-App: ?checkout=creator|pro|studio[&billing=yearly|monthly]
+     → Paddle-Overlay SOFORT öffnen (kein zweiter Klick auf der Preisseite). Läuft über
+     loadPaddle() → eventCallback (checkout.completed) feuert wie gewohnt (Ads/PostHog). */
+  try {
+    const q = new URLSearchParams(location.search);
+    const plan = (q.get('checkout') || '').toLowerCase();
+    const prices = (PADDLE.prices as any)[plan];
+    if (prices) {
+      const priceId = prices[q.get('billing') === 'monthly' ? 'monthly' : 'yearly'];
+      if (priceId && priceId.indexOf('pri_') === 0) {
+        loadPaddle()
+          .then((Paddle) =>
+            Paddle.Checkout.open({
+              items: [{ priceId, quantity: 1 }],
+              settings: { displayMode: 'overlay', locale: document.documentElement.lang || 'en' },
+            }),
+          )
+          .catch(() => {});
+      }
+    }
+  } catch (_) {}
 })();
 
 /* Download-Tracking: Klick auf einen .dmg-Link → benanntes Event in GA + PostHog.
