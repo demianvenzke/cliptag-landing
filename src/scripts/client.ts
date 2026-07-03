@@ -238,7 +238,25 @@ const reduced =
           if (PADDLE.environment === 'sandbox' && w.Paddle?.Environment?.set) {
             w.Paddle.Environment.set('sandbox');
           }
-          w.Paddle.Initialize({ token: PADDLE.token });
+          w.Paddle.Initialize({
+            token: PADDLE.token,
+            // Google Ads: Kauf-Conversion (SEKUNDÄR) bei erfolgreichem Checkout, mit echtem
+            // Betrag + Währung aus Paddle (kein Platzhalter). Fire-and-forget, consent-gated.
+            eventCallback: function (ev: any) {
+              try {
+                if (ev && ev.name === 'checkout.completed') {
+                  const d = ev.data || {};
+                  const totals = d.totals || {};
+                  if (w.gtag) w.gtag('event', 'conversion', {
+                    send_to: 'AW-18295668284/nM9ZCL3P3MxcELz8hpRE',
+                    value: Number(totals.total) || undefined,
+                    currency: d.currency_code,
+                    transaction_id: d.transaction_id || d.id,
+                  });
+                }
+              } catch (_) {}
+            },
+          });
           resolve(w.Paddle);
         } catch (err) {
           reject(err);
@@ -288,6 +306,9 @@ document.addEventListener(
     const w: any = window;
     try { w.gtag && w.gtag('event', 'download', { file_name: file, app_version: ver }); } catch (_) {}
     try { w.posthog && w.posthog.capture && w.posthog.capture('app_download', { version: ver, platform: 'mac', file }); } catch (_) {}
+    // Google Ads: Download-Conversion (PRIMÄR). Der .dmg-Download navigiert nicht weg →
+    // fire-and-forget, kein event_callback/Redirect nötig (die Seite bleibt offen).
+    try { w.gtag && w.gtag('event', 'conversion', { send_to: 'AW-18295668284/PDCuCKXw-ckcELz8hpRE' }); } catch (_) {}
   },
   true,
 );
