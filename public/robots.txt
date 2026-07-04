@@ -1,0 +1,14 @@
+# cliptag.ai — crawlers and AI agents welcome.
+# We explicitly allow AI/LLM crawlers (GPTBot, ClaudeBot, PerplexityBot, etc.):
+# being read, cited and recommended by AI assistants is wanted visibility.
+
+User-agent: *
+Allow: /
+# NOTE: /account is deliberately NOT robots-blocked — it carries noindex (+ X-Robots-Tag),
+# and a robots-blocked URL could never show Google that noindex ("indexed, though blocked").
+# Release binaries (up to ~900 MB) — don't waste your bandwidth or ours.
+Disallow: /*.dmg$
+Disallow: /*.zip$
+Disallow: /*.delta$
+
+Sitemap: https://cliptag.ai/sitemap-index.xml

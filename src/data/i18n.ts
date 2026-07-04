@@ -51,7 +51,7 @@ export const I18N: Record<string, any> = {
       demoTitles: ['Skyline at sunset', 'Street scene in Bangkok', 'Reef dive', 'Luke - Dad Reveal', 'Studio interview'],
       demoTags: [['Drone','City','Golden Hour'], ['Travel','Street','Daytime'], ['Underwater','Coral','Ocean'], ['Reveal','Cloud City','Plot Twist'], ['Interview','Studio','A-Roll']],
       plans: [
-        { cta: 'Start free', clipsNum: '25 clips', clipsUnit: '/ per month', per: '', billedM: 'forever', billedY: 'forever', feats: FEAT3.en.concat(['Rollover buffer']) },
+        { cta: 'Start free', clipsNum: '25 clips', clipsUnit: '/ per month', per: '', billedM: 'forever', billedY: 'forever', feats: FEAT3.en },
         { cta: 'Choose Creator', clipsNum: '500 clips', clipsUnit: '/ per month', per: '/mo', billedM: 'billed monthly', billedY: '$79/yr billed', feats: FEAT3.en.concat(['Rollover up to 1,000 clips']) },
         { cta: 'Choose Pro', clipsNum: '2,000 clips', clipsUnit: '/ per month', per: '/mo', billedM: 'billed monthly', billedY: '$159/yr billed', feats: FEAT3.en.concat(['Rollover up to 6,000 clips']) },
         { cta: 'Choose Studio', clipsNum: '10,000 clips', clipsUnit: '/ per month', per: '/mo', billedM: 'billed monthly', billedY: '$399/yr billed', feats: FEAT3.en.concat(['Everything in Pro', 'Highest cloud volume']) }
@@ -112,7 +112,7 @@ export const I18N: Record<string, any> = {
       demoTitles: ['Skyline im Sonnenuntergang', 'Straßenszene in Bangkok', 'Riff-Tauchgang', 'Luke - Dad Reveal', 'Studio-Interview'],
       demoTags: [['Drohne','Stadt','Goldene Stunde'], ['Reise','Straße','Tag'], ['Unterwasser','Korallen','Meer'], ['Reveal','Cloud City','Plot Twist'], ['Interview','Studio','A-Roll']],
       plans: [
-        { cta: 'Kostenlos starten', clipsNum: '25 Clips', clipsUnit: '/ pro Monat', per: '', billedM: 'für immer', billedY: 'für immer', feats: FEAT3.de.concat(['Rollover-Buffer']) },
+        { cta: 'Kostenlos starten', clipsNum: '25 Clips', clipsUnit: '/ pro Monat', per: '', billedM: 'für immer', billedY: 'für immer', feats: FEAT3.de },
         { cta: 'Creator wählen', clipsNum: '500 Clips', clipsUnit: '/ pro Monat', per: '/Mon', billedM: 'monatlich abgerechnet', billedY: '€79/Jahr abgerechnet', feats: FEAT3.de.concat(['Rollover bis 1.000 Clips']) },
         { cta: 'Pro wählen', clipsNum: '2.000 Clips', clipsUnit: '/ pro Monat', per: '/Mon', billedM: 'monatlich abgerechnet', billedY: '€159/Jahr abgerechnet', feats: FEAT3.de.concat(['Rollover bis 6.000 Clips']) },
         { cta: 'Studio wählen', clipsNum: '10.000 Clips', clipsUnit: '/ pro Monat', per: '/Mon', billedM: 'monatlich abgerechnet', billedY: '€399/Jahr abgerechnet', feats: FEAT3.de.concat(['Alles aus Pro', 'Höchstes Cloud-Volumen']) }
@@ -173,7 +173,7 @@ export const I18N: Record<string, any> = {
       demoTitles: ['Skyline au coucher de soleil', 'Scène de rue à Bangkok', 'Plongée sur le récif', 'Luke - Dad Reveal', 'Interview en studio'],
       demoTags: [['Drone','Ville','Heure dorée'], ['Voyage','Rue','Jour'], ['Sous l\'eau','Corail','Océan'], ['Reveal','Cloud City','Plot Twist'], ['Interview','Studio','A-Roll']],
       plans: [
-        { cta: 'Commencer gratuitement', clipsNum: '25 clips', clipsUnit: '/ par mois', per: '', billedM: 'pour toujours', billedY: 'pour toujours', feats: FEAT3.fr.concat(['Report de crédits']) },
+        { cta: 'Commencer gratuitement', clipsNum: '25 clips', clipsUnit: '/ par mois', per: '', billedM: 'pour toujours', billedY: 'pour toujours', feats: FEAT3.fr },
         { cta: 'Choisir Creator', clipsNum: '500 clips', clipsUnit: '/ par mois', per: '/mois', billedM: 'facturé au mois', billedY: '79 €/an facturé', feats: FEAT3.fr.concat(['Report jusqu\'à 1 000 clips']) },
         { cta: 'Choisir Pro', clipsNum: '2 000 clips', clipsUnit: '/ par mois', per: '/mois', billedM: 'facturé au mois', billedY: '159 €/an facturé', feats: FEAT3.fr.concat(['Report jusqu\'à 6 000 clips']) },
         { cta: 'Choisir Studio', clipsNum: '10 000 clips', clipsUnit: '/ par mois', per: '/mois', billedM: 'facturé au mois', billedY: '399 €/an facturé', feats: FEAT3.fr.concat(['Tout de Pro', 'Volume cloud maximal']) }
@@ -234,7 +234,7 @@ export const I18N: Record<string, any> = {
       demoTitles: ['Skyline al atardecer', 'Escena callejera en Bangkok', 'Buceo en el arrecife', 'Luke - Dad Reveal', 'Entrevista en estudio'],
       demoTags: [['Dron','Ciudad','Hora dorada'], ['Viaje','Calle','Día'], ['Bajo el agua','Coral','Océano'], ['Reveal','Cloud City','Plot Twist'], ['Entrevista','Estudio','A-Roll']],
       plans: [
-        { cta: 'Empezar gratis', clipsNum: '25 clips', clipsUnit: '/ al mes', per: '', billedM: 'para siempre', billedY: 'para siempre', feats: FEAT3.es.concat(['Crédito acumulable']) },
+        { cta: 'Empezar gratis', clipsNum: '25 clips', clipsUnit: '/ al mes', per: '', billedM: 'para siempre', billedY: 'para siempre', feats: FEAT3.es },
         { cta: 'Elegir Creator', clipsNum: '500 clips', clipsUnit: '/ al mes', per: '/mes', billedM: 'facturado al mes', billedY: '79 €/año facturado', feats: FEAT3.es.concat(['Acumulación hasta 1.000 clips']) },
         { cta: 'Elegir Pro', clipsNum: '2.000 clips', clipsUnit: '/ al mes', per: '/mes', billedM: 'facturado al mes', billedY: '159 €/año facturado', feats: FEAT3.es.concat(['Acumulación hasta 6.000 clips']) },
         { cta: 'Elegir Studio', clipsNum: '10.000 clips', clipsUnit: '/ al mes', per: '/mes', billedM: 'facturado al mes', billedY: '399 €/año facturado', feats: FEAT3.es.concat(['Todo de Pro', 'Máximo volumen en la nube']) }
@@ -295,7 +295,7 @@ export const I18N: Record<string, any> = {
       demoTitles: ['Skyline ao pôr do sol', 'Cena de rua em Bangkok', 'Mergulho no recife', 'Luke - Dad Reveal', 'Entrevista em estúdio'],
       demoTags: [['Drone','Cidade','Hora dourada'], ['Viagem','Rua','Dia'], ['Subaquático','Coral','Oceano'], ['Reveal','Cloud City','Plot Twist'], ['Entrevista','Estúdio','A-Roll']],
       plans: [
-        { cta: 'Começar grátis', clipsNum: '25 clipes', clipsUnit: '/ por mês', per: '', billedM: 'para sempre', billedY: 'para sempre', feats: FEAT3.pt.concat(['Créditos acumuláveis']) },
+        { cta: 'Começar grátis', clipsNum: '25 clipes', clipsUnit: '/ por mês', per: '', billedM: 'para sempre', billedY: 'para sempre', feats: FEAT3.pt },
         { cta: 'Escolher Creator', clipsNum: '500 clipes', clipsUnit: '/ por mês', per: '/mês', billedM: 'cobrado por mês', billedY: '€79/ano cobrado', feats: FEAT3.pt.concat(['Acúmulo até 1.000 clipes']) },
         { cta: 'Escolher Pro', clipsNum: '2.000 clipes', clipsUnit: '/ por mês', per: '/mês', billedM: 'cobrado por mês', billedY: '€159/ano cobrado', feats: FEAT3.pt.concat(['Acúmulo até 6.000 clipes']) },
         { cta: 'Escolher Studio', clipsNum: '10.000 clipes', clipsUnit: '/ por mês', per: '/mês', billedM: 'cobrado por mês', billedY: '€399/ano cobrado', feats: FEAT3.pt.concat(['Tudo do Pro', 'Volume máximo na nuvem']) }
@@ -356,7 +356,7 @@ export const I18N: Record<string, any> = {
       demoTitles: ['Skyline al tramonto', 'Scena di strada a Bangkok', 'Immersione nella barriera', 'Luke - Dad Reveal', 'Intervista in studio'],
       demoTags: [['Drone','Città','Ora dorata'], ['Viaggio','Strada','Giorno'], ['Subacqueo','Corallo','Oceano'], ['Reveal','Cloud City','Plot Twist'], ['Intervista','Studio','A-Roll']],
       plans: [
-        { cta: 'Inizia gratis', clipsNum: '25 clip', clipsUnit: '/ al mese', per: '', billedM: 'per sempre', billedY: 'per sempre', feats: FEAT3.it.concat(['Crediti riportabili']) },
+        { cta: 'Inizia gratis', clipsNum: '25 clip', clipsUnit: '/ al mese', per: '', billedM: 'per sempre', billedY: 'per sempre', feats: FEAT3.it },
         { cta: 'Scegli Creator', clipsNum: '500 clip', clipsUnit: '/ al mese', per: '/mese', billedM: 'fatturato al mese', billedY: '€79/anno fatturato', feats: FEAT3.it.concat(['Riporto fino a 1.000 clip']) },
         { cta: 'Scegli Pro', clipsNum: '2.000 clip', clipsUnit: '/ al mese', per: '/mese', billedM: 'fatturato al mese', billedY: '€159/anno fatturato', feats: FEAT3.it.concat(['Riporto fino a 6.000 clip']) },
         { cta: 'Scegli Studio', clipsNum: '10.000 clip', clipsUnit: '/ al mese', per: '/mese', billedM: 'fatturato al mese', billedY: '€399/anno fatturato', feats: FEAT3.it.concat(['Tutto di Pro', 'Massimo volume cloud']) }

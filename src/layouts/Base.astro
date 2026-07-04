@@ -1,5 +1,5 @@
 ---
-import { SITE, POSTHOG } from '../config/site';
+import { SITE, POSTHOG, LINKS, LOCALE_CURRENCY } from '../config/site';
 import { LOCALES, DEFAULT_LOCALE, getDict, localePath, type Locale } from '../lib/i18n';
 import ConsentBanner from '../components/ConsentBanner.astro';
 import NotifyModal from '../components/NotifyModal.astro';
@@ -51,6 +51,33 @@ const faqLd = faqSchema && Array.isArray(dict.faq)
     }
   : null;
 
+// SoftwareApplication JSON-LD (home only, wie faqSchema): maschinenlesbare Produktdaten
+// für Suchmaschinen UND AI-Assistenten (GEO). Keine aggregateRating — wir erfinden keine
+// Bewertungen. GSC wird die Seiten im "Software-App"-Bericht als "ohne Rich-Result" listen
+// (kein Rating) — das ist ERWARTET und darf nicht mit Fake-Ratings "gefixt" werden.
+const appLd = faqSchema
+  ? {
+      '@context': 'https://schema.org',
+      '@type': 'SoftwareApplication',
+      name: SITE.name,
+      operatingSystem: 'macOS 11.0 or later',
+      applicationCategory: 'MultimediaApplication',
+      description: pageDesc,
+      url: canonical,
+      inLanguage: lang,
+      downloadUrl: LINKS.download,
+      softwareVersion: SITE.appVersion,
+      publisher: { '@type': 'Organization', name: SITE.company, url: SITE.origin },
+      offers: {
+        '@type': 'AggregateOffer',
+        lowPrice: '0',
+        highPrice: '39',
+        priceCurrency: LOCALE_CURRENCY[lang] === 'eur' ? 'EUR' : 'USD',
+        offerCount: 4,
+      },
+    }
+  : null;
+
 const ogImage = new URL(SITE.ogImage, SITE.origin).href;
 ---
 
@@ -90,7 +117,9 @@ const ogImage = new URL(SITE.ogImage, SITE.origin).href;
     {SITE.twitter && <meta name="twitter:site" content={'@' + SITE.twitter} />}
     {SITE.twitter && <meta name="twitter:creator" content={'@' + SITE.twitter} />}
 
-    {faqLd && <script type="application/ld+json" set:html={JSON.stringify(faqLd)} />}
+    {/* \u003c-Escape: JSON.stringify escapt kein '<' — ein künftiger FAQ-Text mit '</script>' würde sonst das Tag sprengen. */}
+    {faqLd && <script type="application/ld+json" set:html={JSON.stringify(faqLd).replace(/</g, '\\u003c')} />}
+    {appLd && <script type="application/ld+json" set:html={JSON.stringify(appLd).replace(/</g, '\\u003c')} />}
 
     {/* Google Analytics — production only, behind Consent Mode v2 (geo-gated: GRANTED by
         default outside the EEA/UK/CH, DENIED by default inside — banner required there). */}
