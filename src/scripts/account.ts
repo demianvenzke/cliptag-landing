@@ -134,6 +134,39 @@ function wirePortal() {
   });
 }
 
+function wireRotate() {
+  $('acct-key-rotate')?.addEventListener('click', async () => {
+    const key = $('acct-key')?.textContent || '';
+    if (!key || key === '—') return;
+    if (!confirm('Generate a new license key?\n\nYour current key stops working immediately on ALL Macs. Enter the new key in Cliptag afterwards (Profile → License).')) return;
+    const btn = $('acct-key-rotate') as HTMLButtonElement | null;
+    const msg = $('acct-rotate-msg');
+    const { data: { session } } = await sb.auth.getSession();
+    if (!session) return;
+    if (btn) btn.disabled = true;
+    if (msg) msg.textContent = '';
+    try {
+      const res = await fetch(`${SUPABASE.proxyBase}/v1/account/rotate_key`, {
+        method: 'POST',
+        headers: { Authorization: `Bearer ${session.access_token}`, 'Content-Type': 'application/json' },
+        body: JSON.stringify({ key }),
+      });
+      const j = await res.json().catch(() => ({}));
+      if (res.ok && j && j.key) {
+        const el = $('acct-key'); if (el) el.textContent = j.key;
+        if (msg) msg.textContent = 'New key active — the old one no longer works. We also emailed it to you.';
+      } else if (res.status === 429) {
+        if (msg) msg.textContent = 'You can generate a new key once every 24 hours. Please try again later.';
+      } else {
+        if (msg) msg.textContent = 'Could not generate a new key. Please try again later.';
+      }
+    } catch {
+      if (msg) msg.textContent = 'Could not reach the server. Please try again later.';
+    }
+    if (btn) btn.disabled = false;
+  });
+}
+
 function wireLogout() {
   $('acct-logout')?.addEventListener('click', async () => { await sb.auth.signOut(); });
 }
@@ -146,6 +179,7 @@ sb.auth.onAuthStateChange((_evt, session) => {
 (async () => {
   wireLogin();
   wireCopy();
+  wireRotate();
   wirePortal();
   wireLogout();
   const { data: { session } } = await sb.auth.getSession();
