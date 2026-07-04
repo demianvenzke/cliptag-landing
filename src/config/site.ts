@@ -29,18 +29,18 @@ export const SITE = {
   /** Current shipped macOS app version + direct download. Shown on /account (logged-in
       customers), independent of the marketing `LINKS.download` which stays gated while
       comingSoon. Bump on each notarized release (keep in sync with the appcast). */
-  appVersion: '0.6.3',
-  appDownloadUrl: 'https://cliptag.ai/Cliptag-0.6.3.zip',
+  appVersion: '0.6.4',
+  appDownloadUrl: 'https://cliptag.ai/Cliptag-0.6.4.zip',
 };
 
 /* Real action targets ------------------------------------------------------- */
 export const LINKS = {
   /** Signed + notarized macOS download (.dmg/.zip) or App Store URL. */
-  download: 'https://cliptag.ai/Cliptag-0.6.3.dmg',
+  download: 'https://cliptag.ai/Cliptag-0.6.4.dmg',
   /** Account / auth login URL. */
   signin: 'https://cliptag.ai/account',
   /** Free-plan CTA target. Usually the same as `download`. */
-  freeCta: 'https://cliptag.ai/Cliptag-0.6.3.dmg',
+  freeCta: 'https://cliptag.ai/Cliptag-0.6.4.dmg',
 };
 
 /* Pricing ------------------------------------------------------------------- */
