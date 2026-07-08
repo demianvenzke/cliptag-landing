@@ -188,7 +188,23 @@ const ogImage = new URL(SITE.ogImage, SITE.origin).href;
               session_recording: { maskAllInputs: true, maskTextSelector: '.ph-mask' },
             });
           };
-          try { if (localStorage.getItem('ct_consent') === 'granted') window.__ctLoadPostHog(); } catch (e) {}
+          // Load now if: (a) consent was explicitly granted before, or (b) no choice was
+          // made yet AND the visitor is outside the EEA/UK/CH (mirrors GA's geo-gated
+          // Consent Mode default above, and ConsentBanner.astro's inConsentRegion() check -
+          // that component's own script only runs once its markup is parsed near the end of
+          // <body>, too late to gate this early <head> load, hence the small duplication).
+          // A visitor who explicitly declined (ctC === 'denied') never auto-loads, anywhere.
+          try {
+            var ctC = localStorage.getItem('ct_consent');
+            if (ctC === 'granted') {
+              window.__ctLoadPostHog();
+            } else if (ctC !== 'denied') {
+              var tz = Intl.DateTimeFormat().resolvedOptions().timeZone || '';
+              var euExtra = ['Atlantic/Reykjavik', 'Atlantic/Azores', 'Atlantic/Madeira', 'Atlantic/Canary', 'Asia/Nicosia', 'Asia/Famagusta', 'Africa/Ceuta'];
+              var inConsentRegion = tz.indexOf('Europe/') === 0 || euExtra.indexOf(tz) !== -1;
+              if (!inConsentRegion) window.__ctLoadPostHog();
+            }
+          } catch (e) {}
         })();
       </script>
     )}
